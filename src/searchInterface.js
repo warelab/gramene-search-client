@@ -6,7 +6,6 @@ var _ = require('lodash');
 
 function geneSearch(query) {
   var coreName = 'genes';
-  query |= defaultSolrParameters();
   var url = cores.getUrlForCore(coreName);
   var params = getSolrParameters(query);
 
@@ -24,6 +23,7 @@ function defaultSolrParameters() {
 
 function getSolrParameters(query) {
   var result = defaultSolrParameters();
+  if(!query) return result;
 
   result.q = (query.q || '') + '*';
 

@@ -5,6 +5,7 @@ var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 
 jasminePit.install(global);
+require('jasmine-expect');
 
 describe('searchInterface', function () {
 
@@ -81,5 +82,14 @@ describe('searchInterface', function () {
         expect(doc).toEqual(expectedDoc);
       })
     });
-  })
+  });
+
+  it('should not clobber the params passed in', function() {
+    var params = {q: 'hello!'};
+    var searchPromise = setExpectedResultAndGetSearchPromise('rows10', params);
+
+    return searchPromise.then(function() {
+      expect(axios.get.args[1].q).toStartWith('hello!');
+    });
+  });
 });

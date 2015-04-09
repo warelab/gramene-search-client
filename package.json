@@ -11,8 +11,8 @@
     "url": "git@github:mycrobe/gramene-search-client.git"
   },
   "devDependencies": {
-
-    "jasmine-node": "^1.14.5"
+    "jasmine-node": "^1.14.5",
+    "jasmine-pit": "^2.0.2"
   },
   "dependencies": {
     "axios": "^0.5.2",

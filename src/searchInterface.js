@@ -15,7 +15,7 @@ function geneSearch(query) {
 }
 
 function testSearch(example) {
-  return Q(require('../spec/support/searchResult')[exampleData])
+  return Q(require('../spec/support/searchResult')[example])
     .then(reformatData);
 }
 

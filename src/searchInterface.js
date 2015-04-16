@@ -13,6 +13,11 @@ function geneSearch(query) {
     .then(reformatData);
 }
 
+function testSearch(example) {
+  return Q(require('../spec/support/searchResult')[exampleData])
+    .then(reformatData);
+}
+
 function defaultSolrParameters() {
   return {
     q: '*',
@@ -101,3 +106,4 @@ function reformatFacet(facetData, numericIds, displayName) {
 }
 
 exports.geneSearch = geneSearch;
+exports._testSearch = testSearch;

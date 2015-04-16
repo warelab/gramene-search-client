@@ -84,12 +84,18 @@ describe('searchInterface', function () {
     });
   });
 
-  it('should not clobber the params passed in', function() {
+  pit('should not clobber the params passed in', function() {
     var params = {q: 'hello!'};
     var searchPromise = setExpectedResultAndGetSearchPromise('rows10', params);
 
     return searchPromise.then(function() {
-      expect(axios.get.args[1].q).toStartWith('hello!');
+      expect(axios.get.calls[0].args[1].params.q).toStartWith('hello!');
     });
   });
+
+  it('should allow test searches to be performed', function() {
+    return searchInterface._testSearch('binned').then(function(data) {
+      expect(data).toBeDefined();
+    })
+  })
 });

@@ -3,6 +3,7 @@
 var cores = require('./solrCores');
 var axios = require('axios');
 var _ = require('lodash');
+var Q = require('q');
 
 function geneSearch(query) {
   var coreName = 'genes';

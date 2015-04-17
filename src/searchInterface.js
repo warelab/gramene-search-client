@@ -3,6 +3,7 @@
 var cores = require('./solrCores');
 var axios = require('axios');
 var _ = require('lodash');
+var Q = require('q');
 
 function geneSearch(query) {
   var coreName = 'genes';
@@ -10,6 +11,11 @@ function geneSearch(query) {
   var params = getSolrParameters(query);
 
   return axios.get(url, {params: params})
+    .then(reformatData);
+}
+
+function testSearch(example) {
+  return Q(require('../spec/support/searchResult')[example])
     .then(reformatData);
 }
 
@@ -60,9 +66,7 @@ function reformatData(response) {
   if(originalFacets && !data.results) {
     var fixed = data.results = {};
     for(var f in originalFacets) {
-      if(originalFacets[f].length > 1) {
-        fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(f), cores.getXrefDisplayName(f));
-      }
+      fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(f), cores.getXrefDisplayName(f));
     }
     delete data.facet_counts;
   }
@@ -101,3 +105,4 @@ function reformatFacet(facetData, numericIds, displayName) {
 }
 
 exports.geneSearch = geneSearch;
+exports._testSearch = testSearch;

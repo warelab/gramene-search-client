@@ -43,11 +43,11 @@ describe('solrCores', function () {
 
   it('should tell me which fields look like they will have numeric values', function() {
     ['fixed_200_bin', 'interpro_xrefi', 'bin_thing', 'taxon_id', 'start', 'end', 'strand'].map(function(fieldWithNumericData) {
-      expect(solrCores.valuesAreNumeric(fieldWithNumericData)).toBeTruthy();
+      expect(solrCores.valuesAreNumeric(fieldWithNumericData)).toBeTruthy(fieldWithNumericData + ' should be numeric');
     });
 
     [undefined, 'system_name', 'domainRoots', 'eg_gene_tree', new Date()].map(function(notAFieldWithNumericData) {
       expect(solrCores.valuesAreNumeric(notAFieldWithNumericData)).toBeFalsy();
-    })
+    });
   });
 });

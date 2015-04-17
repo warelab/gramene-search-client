@@ -66,9 +66,7 @@ function reformatData(response) {
   if(originalFacets && !data.results) {
     var fixed = data.results = {};
     for(var f in originalFacets) {
-      if(originalFacets[f].length > 1) {
-        fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(f), cores.getXrefDisplayName(f));
-      }
+      fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(f), cores.getXrefDisplayName(f));
     }
     delete data.facet_counts;
   }

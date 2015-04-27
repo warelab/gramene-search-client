@@ -25,6 +25,31 @@ module.exports = {
     }
   },
 
+  tally: {
+    data: {
+      "responseHeader": {
+        "status":0,
+        "QTime":391,
+        "params": {
+          "q":"*",
+          "json.facet":"{species:\"unique(taxon_id)\",GO:\"unique(GO_xrefi)\",biotype:\"unique(biotype)\",PO:\"unique(PO_xrefi)\",domains:\"unique(interpro_xrefi)\"}",
+          "rows":"0"
+        }
+      },
+      "response": {
+        "numFound": 1661880, "start": 0, "docs": []
+      },
+      "facets":{
+        "count":1661880,
+        "species":38,
+        "GO":6512,
+        "biotype":23,
+        "PO":401,
+        "domains":9378
+      }
+    }
+  },
+  
   faceted: {
     data: {
       "responseHeader": {

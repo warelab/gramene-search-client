@@ -36,13 +36,29 @@ describe('searchInterface', function () {
     expect(args.length).toEqual(2);
 
     var params = args[1].params;
-    expect(args[0]).toEqual('http://data.gramene.org/44/search/genes?');
+    expect(args[0]).toEqual('http://data.gramene.org/search/genes?');
     expect(params.q).toEqual('*');
     expect(params.rows).toEqual(0);
     expect(params.facet).toEqual(true);
 
     return searchPromise.then(function(searchResult) {
       checkResultCounts(searchResult);
+    });
+  });
+
+  pit('should process tally correctly', function() {
+    var searchPromise = setExpectedResultAndGetSearchPromise('tally');
+    
+    return searchPromise.then(function(searchResult) {
+      checkResultCounts(searchResult);
+
+      expect(searchResult.tally).toBeDefined();
+      expect(searchResult.tally.GO).toEqual(expectedResult.data.facets.GO);
+      expect(searchResult.tally.PO).toEqual(expectedResult.data.facets.PO);
+      expect(searchResult.tally.species).toEqual(expectedResult.data.facets.species);
+      expect(searchResult.tally.domains).toEqual(expectedResult.data.facets.domains);
+      expect(searchResult.tally.biotype).toEqual(expectedResult.data.facets.biotype);
+
     });
   });
 

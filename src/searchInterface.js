@@ -11,12 +11,12 @@ function geneSearch(query) {
   var params = getSolrParameters(query);
 
   return axios.get(url, {params: params})
-    .then(reformatData);
+    .then(reformatData(coreName));
 }
 
 function testSearch(example) {
   return Q(require('../spec/support/searchResult')[example])
-    .then(reformatData);
+    .then(reformatData('genes'));
 }
 
 function defaultSolrParameters() {
@@ -60,25 +60,39 @@ function getSolrParameters(query) {
   return result;
 }
 
-function reformatData(response) {
-  var data = response.data;
-  var originalFacets = data.facet_counts.facet_fields;
-  if(originalFacets && !data.results) {
-    var fixed = data.results = {};
-    for(var f in originalFacets) {
-      fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(f), cores.getXrefDisplayName(f));
+function reformatData(core) {
+  return function(response) {
+    var data = response.data;
+    var fixed = {};
+    
+    if (data.facet_counts) {
+      var originalFacets = data.facet_counts.facet_fields;
+      if(originalFacets && !data.results) {
+        fixed = data.results = {};
+        for(var f in originalFacets) {
+          fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(core,f), cores.getXrefDisplayName(core,f));
+        }
+        delete data.facet_counts;
+      }
     }
-    delete data.facet_counts;
-  }
-  if(data.response.docs.length) {
-    fixed.list = data.response.docs;
-  }
-  fixed.metadata = {
-    count: data.response.numFound,
-    qtime: data.responseHeader.QTime
-  };
+        
+    if(data.response.docs.length) {
+      fixed.list = data.response.docs;
+    }
+    fixed.metadata = {
+      count: data.response.numFound,
+      qtime: data.responseHeader.QTime
+    };
 
-  return fixed;
+    if (data.facets) {
+      fixed.tally={};
+      for(var f in data.facets) {
+        fixed.tally[f] = data.facets[f];
+      }
+    }
+
+    return fixed;
+  }
 }
 
 function reformatFacet(facetData, numericIds, displayName) {

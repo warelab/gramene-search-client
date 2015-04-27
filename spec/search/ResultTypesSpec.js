@@ -11,6 +11,7 @@ describe('resultTypes', function() {
     expect(resultTypes.get('list')).toBeDefined();
     expect(resultTypes.get('distribution')).toBeDefined();
     expect(resultTypes.get('facet')).toBeDefined();
+    expect(resultTypes.get('tally')).toBeDefined();
   });
 
   it('should not return anything for an argument that is not a result type', function() {
@@ -25,6 +26,15 @@ describe('resultTypes', function() {
     var rt = resultTypes.get('list');
     expect(rt.rows).toEqual(10);
     expect(rt.start).toEqual(0);
+    expect(rt['facet.limit']).toBeUndefined();
+    expect(rt['facet.mincount']).toBeUndefined();
+    expect(rt['facet.field']).toBeUndefined();
+  });
+
+  it('should include default properties for tally', function() {
+    var rt = resultTypes.get('tally');
+    expect(rt['json.facet']).toBeDefined();
+    expect(rt.start).toBeUndefined();
     expect(rt['facet.limit']).toBeUndefined();
     expect(rt['facet.mincount']).toBeUndefined();
     expect(rt['facet.field']).toBeUndefined();

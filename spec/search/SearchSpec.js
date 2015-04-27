@@ -36,7 +36,7 @@ describe('searchInterface', function () {
     expect(args.length).toEqual(2);
 
     var params = args[1].params;
-    expect(args[0]).toEqual('http://data.gramene.org/44/search/genes?');
+    expect(args[0]).toEqual('http://data.gramene.org/search/genes?');
     expect(params.q).toEqual('*');
     expect(params.rows).toEqual(0);
     expect(params.facet).toEqual(true);

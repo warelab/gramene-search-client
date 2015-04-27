@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 
-var rootURL = 'http://data.gramene.org/44/search/';
+var rootURL = 'http://data.gramene.org/search/';
 var cores = {
   genes: {
     xref: {

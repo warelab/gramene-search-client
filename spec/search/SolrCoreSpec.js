@@ -33,21 +33,26 @@ describe('solrCores', function () {
       GO_xrefi: {displayName: 'GO'},
       PO_xrefi: {displayName: 'PO'}
     }, function (xref, name) {
-        expect(solrCores.getXrefDisplayName(name)).toEqual(xref.displayName);
+        expect(solrCores.getXrefDisplayName('genes',name)).toEqual(xref.displayName);
       });
 
     ['hello', undefined, new Date()].map(function(notAnXref) {
-      expect(solrCores.getXrefDisplayName(notAnXref)).toEqual(notAnXref);
+      expect(solrCores.getXrefDisplayName('genes',notAnXref)).toEqual(notAnXref);
+      expect(solrCores.getXrefDisplayName('taxonomy',notAnXref)).toEqual(notAnXref);
     })
   });
 
   it('should tell me which fields look like they will have numeric values', function() {
-    ['fixed_200_bin', 'interpro_xrefi', 'bin_thing', 'taxon_id', 'start', 'end', 'strand'].map(function(fieldWithNumericData) {
-      expect(solrCores.valuesAreNumeric(fieldWithNumericData)).toBeTruthy(fieldWithNumericData + ' should be numeric');
+    ['fixed_200_bin', 'interpro_xrefi', 'bobs_ancestors', 'taxon_id', 'start', 'end', 'strand'].map(function(fieldWithNumericData) {
+      expect(solrCores.valuesAreNumeric('genes',fieldWithNumericData)).toBeTruthy(fieldWithNumericData + ' should be numeric');
+    });
+
+    ['id','field_i', 'field_is','_genes'].map(function(fieldWithNumericData) {
+      expect(solrCores.valuesAreNumeric('GO',fieldWithNumericData)).toBeTruthy(fieldWithNumericData + ' should be numeric');
     });
 
     [undefined, 'system_name', 'domainRoots', 'eg_gene_tree', new Date()].map(function(notAFieldWithNumericData) {
-      expect(solrCores.valuesAreNumeric(notAFieldWithNumericData)).toBeFalsy();
+      expect(solrCores.valuesAreNumeric('genes',notAFieldWithNumericData)).toBeFalsy();
     });
   });
 });

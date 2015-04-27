@@ -46,6 +46,22 @@ describe('searchInterface', function () {
     });
   });
 
+  pit('should process tally correctly', function() {
+    var searchPromise = setExpectedResultAndGetSearchPromise('tally');
+    
+    return searchPromise.then(function(searchResult) {
+      checkResultCounts(searchResult);
+
+      expect(searchResult.tally).toBeDefined();
+      expect(searchResult.tally.GO).toEqual(expectedResult.data.facets.GO);
+      expect(searchResult.tally.PO).toEqual(expectedResult.data.facets.PO);
+      expect(searchResult.tally.species).toEqual(expectedResult.data.facets.species);
+      expect(searchResult.tally.domains).toEqual(expectedResult.data.facets.domains);
+      expect(searchResult.tally.biotype).toEqual(expectedResult.data.facets.biotype);
+
+    });
+  });
+
   pit('should process facet correctly', function() {
     var searchPromise = setExpectedResultAndGetSearchPromise('faceted');
 

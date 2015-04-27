@@ -63,14 +63,19 @@ function getSolrParameters(query) {
 function reformatData(core) {
   return function(response) {
     var data = response.data;
-    var originalFacets = data.facet_counts.facet_fields;
-    if(originalFacets && !data.results) {
-      var fixed = data.results = {};
-      for(var f in originalFacets) {
-        fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(core,f), cores.getXrefDisplayName(core,f));
+    var fixed = {};
+    
+    if (data.facet_counts) {
+      var originalFacets = data.facet_counts.facet_fields;
+      if(originalFacets && !data.results) {
+        fixed = data.results = {};
+        for(var f in originalFacets) {
+          fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(core,f), cores.getXrefDisplayName(core,f));
+        }
+        delete data.facet_counts;
       }
-      delete data.facet_counts;
     }
+        
     if(data.response.docs.length) {
       fixed.list = data.response.docs;
     }
@@ -78,6 +83,13 @@ function reformatData(core) {
       count: data.response.numFound,
       qtime: data.responseHeader.QTime
     };
+
+    if (data.facets) {
+      fixed.tally={};
+      for(var f in data.facets) {
+        fixed.tally[f] = data.facets[f];
+      }
+    }
 
     return fixed;
   }

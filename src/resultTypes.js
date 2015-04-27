@@ -15,6 +15,15 @@ var resultTypes = {
     'facet.limit': 50,
     'facet.mincount': 0,
     'facet.field': 'taxon_id'
+  },
+  tally: {
+    'json.facet' : {
+      'species' : 'unique(taxon_id)',
+      'biotype' : 'unique(biotype)',
+      'GO'      : 'unique(GO_xrefi)',
+      'PO'      : 'unique(PO_xrefi)',
+      'domains' : 'unique(interpro_xrefi)'
+    }
   }
 };
 

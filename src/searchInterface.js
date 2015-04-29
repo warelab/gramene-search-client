@@ -14,6 +14,27 @@ function geneSearch(query) {
     .then(reformatData(coreName));
 }
 
+function suggest(queryString) {
+  var coreRequests = cores.coreNames().map(function(coreName) {
+    var url = cores.getSuggestUrl(coreName);
+    var params = cores.getSuggestParams(coreName,queryString);
+    return axios.get(url, {params: params});
+  });
+  
+  return axios.all(coreRequests)
+    .then(function(coreResponses) {
+      var data = [];
+      var coreNames = cores.coreNames();
+      for(var i=0; i<coreNames.length; i++) {
+        data.push({
+          label: cores.getCoreDisplayName(coreNames[i]),
+          suggestions: cores.handleSuggestResponse(coreNames[i], coreResponses[i], queryString)
+        });
+      }
+      return data;
+    });
+}
+
 function testSearch(example) {
   return Q(require('../spec/support/searchResult')[example])
     .then(reformatData('genes'));
@@ -120,3 +141,4 @@ function reformatFacet(facetData, numericIds, displayName) {
 
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
+exports.suggest = suggest;

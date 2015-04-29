@@ -36,7 +36,7 @@ describe('searchInterface', function () {
     expect(args.length).toEqual(2);
 
     var params = args[1].params;
-    expect(args[0]).toEqual('http://data.gramene.org/search/genes?');
+    // expect(args[0]).toEqual('http://data.gramene.org/search/genes?');
     expect(params.q).toEqual('*');
     expect(params.rows).toEqual(0);
     expect(params.facet).toEqual(true);
@@ -113,5 +113,30 @@ describe('searchInterface', function () {
     return searchInterface._testSearch('binned').then(function(data) {
       expect(data).toBeDefined();
     })
-  })
+  });
+  
+  pit('axios.all should behave as expected', function() {
+    // given 
+    spyOn(axios, 'get');
+    var url = 'http://whatever';
+    
+    // when
+    return axios.all([
+      axios.get(url, {params: {foo:'bar'}}),
+      axios.get(url, {params: {foo:'baz'}})
+    ]).then(function(a, b) {
+      
+      // then
+      expect(axios.get.calls.length).toEqual(2);
+      
+      var call0 = axios.get.calls[0];
+      var call1 = axios.get.calls[1];
+      
+      expect(call0.args[0]).toEqual(url);
+      expect(call0.args[1].params.foo).toEqual('bar');
+      expect(call1.args[0]).toEqual(url);
+      expect(call1.args[1].params.foo).toEqual('baz');
+    });
+  });
+  
 });

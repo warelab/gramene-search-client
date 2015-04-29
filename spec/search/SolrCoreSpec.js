@@ -18,6 +18,11 @@ describe('solrCores', function () {
       expect(url).toEndWith(core + '?');
     });
   });
+  
+  it('should provide a URL for making suggestions', function () {
+    expect(solrCores.getSuggestUrl('genes')).toEqual('http://data.gramene.org/suggest/genes?');
+    expect(solrCores.getSuggestUrl('GO')).toEqual('http://data.gramene.org/search/GO?');
+  });
 
   it('should not provide a URL for anything that\'s not a search core', function () {
     ['geness', '', undefined, new Date(), Array.prototype].map(function (notAcore) {

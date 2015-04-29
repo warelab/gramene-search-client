@@ -14,6 +14,26 @@ function geneSearch(query) {
     .then(reformatData(coreName));
 }
 
+function suggest(queryString) {
+  var coreRequests = cores.coreNames().map(function(coreName) {
+    var url = cores.getSuggestUrl(coreName);
+    var params = cores.getSuggestParams(coreName,queryString);
+    return axios.get(url, {params: params});
+  });
+  
+  return axios.all(coreRequests)
+    .then(axios.spread(function() {
+      var data = {};
+      var coreResponses = Array.prototype.slice.call(arguments);
+      var coreNames = cores.coreNames();
+      for(var i=0; i<coreNames.length; i++) {
+        data[coreNames[i]] = cores.handleSuggestResponse(coreNames[i], coreResponses[i], queryString);
+      }
+      console.log(data);
+      return data;
+  }));
+}
+
 function testSearch(example) {
   return Q(require('../spec/support/searchResult')[example])
     .then(reformatData('genes'));
@@ -120,3 +140,4 @@ function reformatFacet(facetData, numericIds, displayName) {
 
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
+exports.suggest = suggest;

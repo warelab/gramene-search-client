@@ -2,6 +2,7 @@
 var _ = require('lodash');
 
 var rootURL = 'http://data.gramene.org/search/';
+var suggestURL = 'http://data.gramene.org/suggest/';
 function isNumeric(fieldName) {
   return fieldName && (
     _.endsWith(fieldName, '_i') ||
@@ -9,6 +10,25 @@ function isNumeric(fieldName) {
     fieldName === 'id' ||
     fieldName === '_genes'
   );
+}
+function suggestParams(queryString) {
+  return {
+    q: '_terms:' + queryString.replace(/\s/g,'*'),
+    fl: 'id,_genes',
+    sort: '_genes desc',
+    hl: true,
+    'hl.fl':'_terms'
+  };
+}
+function suggestFormatter(response,queryString) {
+  // this function reformats the responses from the aux cores
+  // there is another defined for genes
+  var suggestions = [];
+  var hl = response.data.highlighting;
+  response.data.response.docs.forEach(function(doc){
+    suggestions.push({term:hl[doc.id]._terms[0], weight:doc._genes});
+  });
+  return suggestions;
 }
 var cores = {
   genes: {
@@ -28,19 +48,45 @@ var cores = {
         fieldName === 'end' ||
         fieldName === 'strand'
       );
+    },
+    suggestUrl: suggestURL,
+    suggestParams: function(queryString) {
+      return {
+        q:queryString
+      }
+    },
+    suggestFormatter: function(response,queryString) {
+      var suggestions = response.data.suggest.terms[queryString].suggestions;
+      return suggestions.map(function(sug) {
+        sug.term = sug.term.replace(/b>/g,'em>');
+        return sug;
+      });
+      return suggestions;
     }
   },
   taxonomy: {
-    isNumeric: isNumeric
+    isNumeric: isNumeric,
+    suggestUrl: rootURL,
+    suggestParams: suggestParams,
+    suggestFormatter: suggestFormatter
   },
   interpro: {
-    isNumeric: isNumeric
+    isNumeric: isNumeric,
+    suggestUrl: rootURL,
+    suggestParams: suggestParams,
+    suggestFormatter: suggestFormatter
   },
   GO: {
-    isNumeric: isNumeric
+    isNumeric: isNumeric,
+    suggestUrl: rootURL,
+    suggestParams: suggestParams,
+    suggestFormatter: suggestFormatter
   },
   PO: {
-    isNumeric: isNumeric
+    isNumeric: isNumeric,
+    suggestUrl: rootURL,
+    suggestParams: suggestParams,
+    suggestFormatter: suggestFormatter
   }
 };
 
@@ -59,3 +105,18 @@ exports.getXrefDisplayName = function (core, xrefName) {
 exports.valuesAreNumeric = function (core, fieldName) {
   return cores[core].isNumeric(fieldName);
 };
+
+exports.coreNames = function() {
+  return Object.keys(cores);
+};
+
+exports.getSuggestUrl = function(core) {
+  return cores[core].suggestUrl + core + '?';
+}
+exports.getSuggestParams = function(core, queryString) {
+  return cores[core].suggestParams(queryString);
+}
+
+exports.handleSuggestResponse = function(core, response, queryString) {
+  return cores[core].suggestFormatter(response,queryString);
+}

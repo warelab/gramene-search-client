@@ -13,7 +13,7 @@ function isNumeric(fieldName) {
 }
 function suggestParams(queryString) {
   return {
-    q: '_terms:' + queryString.replace(/\s/g,'*'),
+    q: '_terms:' + queryString.replace(/\s/g,'*') + '*',
     fl: 'id,_genes,id_s,name_s',
     sort: '_genes desc',
     hl: true,

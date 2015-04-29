@@ -14,20 +14,24 @@ function isNumeric(fieldName) {
 function suggestParams(queryString) {
   return {
     q: '_terms:' + queryString.replace(/\s/g,'*') + '*',
-    fl: 'id,_genes,id_s,name_s',
-    sort: '_genes desc',
-    hl: true,
-    'hl.fl':'_terms'
+    fl: '_terms,id,_genes,id_s,name_s',
+    sort: '_genes desc'
   };
 }
 function suggestFormatter(response,queryString,core) {
   // this function reformats the responses from the aux cores
   // there is another defined for genes
+  var reList = queryString.split('*').map(function(term) {
+    return new RegExp('\\b('+term+')','gi');
+  });
   var suggestions = [];
-  var hl = response.data.highlighting;
   response.data.response.docs.forEach(function(doc){
+    var hl = doc._terms;
+    reList.forEach(function(re) {
+      hl= hl.replace(re,'<em>$1</em>');
+    });
     suggestions.push({
-      term: hl[doc.id]._terms[0],
+      term: hl,
       weight: doc._genes,
       fq: cores[core].fqField+':'+doc.id,
       name: doc.name_s,

@@ -139,9 +139,4 @@ describe('searchInterface', function () {
     });
   });
   
-  pit('figuring out things', function() {
-    return searchInterface.suggest("p").then(function(data) {
-      expect(data).toBeDefined();
-    });
-  });
 });

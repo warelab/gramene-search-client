@@ -22,16 +22,17 @@ function suggest(queryString) {
   });
   
   return axios.all(coreRequests)
-    .then(axios.spread(function() {
-      var data = {};
-      var coreResponses = Array.prototype.slice.call(arguments);
+    .then(function(coreResponses) {
+      var data = [];
       var coreNames = cores.coreNames();
       for(var i=0; i<coreNames.length; i++) {
-        data[coreNames[i]] = cores.handleSuggestResponse(coreNames[i], coreResponses[i], queryString);
+        data.push({
+          label: cores.getCoreDisplayName(coreNames[i]),
+          suggestions: cores.handleSuggestResponse(coreNames[i], coreResponses[i], queryString)
+        });
       }
-      console.log(data);
       return data;
-  }));
+    });
 }
 
 function testSearch(example) {

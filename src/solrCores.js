@@ -12,8 +12,12 @@ function isNumeric(fieldName) {
   );
 }
 function suggestParams(queryString) {
+  queryString += '*';
+  if (queryString.match(/\s/)) {
+    queryString = '\''+queryString+'\'';
+  }
   return {
-    q: '_terms:' + queryString.replace(/\s/g,'*') + '*',
+    q: '_terms:' + queryString,
     fl: '_terms,id,_genes,id_s,name_s',
     sort: '_genes desc'
   };
@@ -21,9 +25,16 @@ function suggestParams(queryString) {
 function suggestFormatter(response,queryString,core) {
   // this function reformats the responses from the aux cores
   // there is another defined for genes
-  var reList = queryString.split('*').map(function(term) {
-    return new RegExp('\\b('+term+')','gi');
-  });
+  var reList = queryString.split(/\s/);
+  for(var i=0;i<reList.length;i++) {
+    var term = reList[i];
+    if (i+1==reList.length) {
+      reList[i] = new RegExp('\\b(' + term + ')', 'gi');
+    }
+    else {
+      reList[i] = new RegExp('\\b(' + term + ')\\b', 'gi');
+    }
+  }
   var suggestions = [];
   response.data.response.docs.forEach(function(doc){
     var hl = doc._terms;

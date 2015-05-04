@@ -57,6 +57,10 @@ function getSolrParameters(query) {
     });
   }
 
+  if(query.filters && Object.keys(query.filters).length) {
+    result.fq = Object.keys(query.filters);
+  }
+
   return result;
 }
 

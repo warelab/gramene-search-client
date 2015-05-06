@@ -35,6 +35,22 @@ function suggest(queryString) {
     });
 }
 
+function nameLookup(coreName,idList) {
+  var url = cores.getUrlForCore(coreName);
+  var params = {
+    q:'id:(' + idList.join(' ') + ')',
+    fl:'id,name_s'
+  };
+  return axios.get(url, {params: params})
+    .then(function(response) {
+      var lut = {};
+      response.data.response.docs.forEach(function(doc) {
+        lut[doc.id] = doc.name_s;
+      });
+      return lut;
+    });
+}
+
 function testSearch(example) {
   return Q(require('../spec/support/searchResult')[example])
     .then(reformatData('genes'));
@@ -146,3 +162,4 @@ function reformatFacet(facetData, numericIds, displayName) {
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
 exports.suggest = suggest;
+exports.nameLookup = nameLookup;

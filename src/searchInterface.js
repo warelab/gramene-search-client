@@ -131,13 +131,14 @@ function reformatFacet(facetData, numericIds, displayName) {
   //                 "109376" : { count: 46500 }
   //               }
   //      }
-  var result = {data: {}, count: 0, displayName: displayName};
+  var result = {data: {}, sorted: [], count: 0, displayName: displayName};
   for (var i=0;i<facetData.length;i+=2) {
-    var id = facetData[i]
-      , count = facetData[i+1];
+    var id = numericIds ? parseInt(facetData[i]) : facetData[i]
+      , count = facetData[i+1]
+      , datum = { id: id, count: count };
 
-    if(numericIds) id = +id;
-    result.data[id] = { count: count };
+    result.data[id] = datum;
+    result.sorted.push(datum);
     if(count > 0) result.count++;
   }
   return result;

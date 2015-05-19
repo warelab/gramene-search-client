@@ -49,24 +49,29 @@ describe('resultTypes', function() {
     expect(rt['facet.field']).toBeUndefined();
   });
 
-  it('should rename facet properties to be facet-specific if facet.field is supplied as a param', function() {
+  it('should create SOLR local params facet.field and key are supplied as a param', function() {
+    var rt = resultTypes.get('distribution', {'facet.field': 'foobar', key: 'baz'});
+    expect(rt.rows).toBeUndefined();
+    expect(rt.start).toBeUndefined();
+    expect(rt['facet.limit']).toBeUndefined();
+    expect(rt['facet.mincount']).toBeUndefined();
+    expect(rt['facet.field']).toEqual("{!facet.limit='-1' facet.mincount='1' key='baz'}foobar");
+  });
+
+  it('should set the key to be the same as the facet.field if one is not supplied', function() {
     var rt = resultTypes.get('distribution', {'facet.field': 'foobar'});
     expect(rt.rows).toBeUndefined();
     expect(rt.start).toBeUndefined();
     expect(rt['facet.limit']).toBeUndefined();
     expect(rt['facet.mincount']).toBeUndefined();
-    expect(rt['facet.field']).toEqual('foobar');
-    expect(rt['f.foobar.facet.limit']).toEqual(-1);
-    expect(rt['f.foobar.facet.mincount']).toEqual(1);
+    expect(rt['facet.field']).toEqual("{!facet.limit='-1' facet.mincount='1' key='foobar'}foobar");
   });
 
-  it('should rename facet properties supplied as custom params to be facet-specific if facet.field is supplied as a param', function() {
-    var rt = resultTypes.get('list', {'facet.field': 'foobar', 'facet.lalalala': 'baz'});
-    expect(rt.rows).toEqual(10);
-    expect(rt.start).toEqual(0);
+  it('should create SOLR local params from properties supplied as custom params if facet.field and key are supplied as params', function() {
+    var rt = resultTypes.get('facet', {'facet.field': 'foobar', 'facet.lalalala': 'baz', key:'xyzzy'});
     expect(rt['facet.lalalala']).toBeUndefined();
-    expect(rt['facet.field']).toEqual('foobar');
-    expect(rt['f.foobar.facet.lalalala']).toEqual('baz');
+    expect(rt.key).toBeUndefined();
+    expect(rt['facet.field']).toEqual("{!facet.limit='50' facet.mincount='0' facet.lalalala='baz' key='xyzzy'}foobar");
   });
 
   it('should include default properties for facet and rename facet-specific properties for default facet.field', function() {
@@ -75,8 +80,6 @@ describe('resultTypes', function() {
     expect(rt.start).toBeUndefined();
     expect(rt['facet.limit']).toBeUndefined();
     expect(rt['facet.mincount']).toBeUndefined();
-    expect(rt['f.taxon_id.facet.limit']).toEqual(50);
-    expect(rt['f.taxon_id.facet.mincount']).toEqual(0);
-    expect(rt['facet.field']).toEqual('taxon_id');
+    expect(rt['facet.field']).toEqual("{!facet.limit='50' facet.mincount='0' key='taxon_id'}taxon_id");
   });
 });

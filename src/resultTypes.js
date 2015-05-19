@@ -22,7 +22,8 @@ var resultTypes = {
       'biotype' : 'unique(biotype)',
       'GO'      : 'unique(GO_xrefi)',
       'PO'      : 'unique(PO_xrefi)',
-      'domains' : 'unique(interpro_xrefi)'
+      'domains' : 'unique(interpro_xrefi)',
+      'epl_gene_tree' : 'unique(epl_gene_tree)'
     }
   }
 };

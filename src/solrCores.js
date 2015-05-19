@@ -17,7 +17,7 @@ function suggestParams(queryString) {
     queryString = '\''+queryString+'\'';
   }
   return {
-    q: '_terms:' + queryString,
+    q: queryString,
     fl: '_terms,id,_genes,id_s,name_s',
     sort: '_genes desc'
   };

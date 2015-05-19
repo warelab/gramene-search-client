@@ -35,17 +35,22 @@ function suggest(queryString) {
     });
 }
 
-function nameLookup(coreName,idList) {
+function coreLookup(coreName,idList,fieldList) {
   var url = cores.getUrlForCore(coreName);
+  if (!fieldList) {
+    fieldList = ['id','name_s'];
+  }
   var params = {
-    q:'id:(' + idList.join(' ') + ')',
-    fl:'id,name_s'
+    q: 'id:(' + idList.join(' ') + ')',
+    fl: fieldList.join(',')
   };
   return axios.get(url, {params: params})
     .then(function(response) {
       var lut = {};
       response.data.response.docs.forEach(function(doc) {
-        lut[doc.id] = doc.name_s;
+        var id = doc.id;
+        delete doc['id'];
+        lut[id] = doc;
       });
       return lut;
     });
@@ -162,4 +167,4 @@ function reformatFacet(facetData, numericIds, displayName) {
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
 exports.suggest = suggest;
-exports.nameLookup = nameLookup;
+exports.coreLookup = coreLookup;

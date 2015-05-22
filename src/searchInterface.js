@@ -36,20 +36,16 @@ function suggest(queryString) {
 }
 
 function coreLookup(coreName,idList,fieldList) {
-  var url = cores.getUrlForCore(coreName);
-  if (!fieldList) {
-    fieldList = ['id','name_s'];
-  }
+  var url = 'http://data.gramene.org/' + coreName + '/select';
   var params = {
-    q: 'id:(' + idList.join(' ') + ')',
-    fl: fieldList.join(',')
+    idList: idList.join(',')
   };
   return axios.get(url, {params: params})
     .then(function(response) {
       var lut = {};
-      response.data.response.docs.forEach(function(doc) {
-        var id = doc.id;
-        delete doc['id'];
+      response.data.response.forEach(function(doc) {
+        var id = doc._id;
+        delete doc['_id'];
         lut[id] = doc;
       });
       return lut;

@@ -38,7 +38,7 @@ function suggest(queryString) {
 function coreLookup(coreName,idList,fieldList) {
   var url = 'http://data.gramene.org/' + coreName + '/select';
   var params = {
-    _id: idList
+    idList: idList.join(',')
   };
   return axios.get(url, {params: params})
     .then(function(response) {

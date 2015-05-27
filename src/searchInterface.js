@@ -35,21 +35,58 @@ function suggest(queryString) {
     });
 }
 
-function coreLookup(coreName,idList,fieldList) {
+function coreLookup(coreName,ids,userParams) {
   var url = 'http://data.gramene.org/' + coreName + '/select';
-  var params = {
-    idList: idList.join(',')
-  };
-  return axios.get(url, {params: params})
+  var idList;
+  if (Array.isArray(ids)) {
+    idList = _.uniq(ids);
+  } else {
+    idList = [ids];
+  }
+  var queryField = '_id';
+
+  var p = _.cloneDeep(userParams);
+  if (!p) p={};
+  if (p.field) {
+    queryField = p.field;
+    delete p.field;
+  }
+
+  if (p.fl && !_.includes(p.fl,queryField)) {
+     p.fl.push(queryField);
+     p.fl = p.fl.join(',');
+  }
+  // idList may be too long, so we split into batches
+  var batchSize=100;
+  var promises = [];
+  var offset=0;
+  var lut={};
+  while (offset < idList.length) {
+    var params = {
+      rows:-1 // because batchSize might be < number of matched docs
+    };
+    params[queryField] = idList.slice(offset,offset+batchSize);
+    for(var f in p) {
+      params[f] = p[f];
+    }
+    offset += batchSize;
+    promises.push(axios.get(url, {params: params})
     .then(function(response) {
-      var lut = {};
       response.data.response.forEach(function(doc) {
-        var id = doc._id;
-        delete doc['_id'];
-        lut[id] = doc;
+        var k = doc[queryField];
+        delete doc[queryField];
+        if (lut[k]) {
+          lut[k].push(doc);
+        }
+        else {
+          lut[k] = [doc];
+        }
       });
-      return lut;
-    });
+    }));
+  }
+  return axios.all(promises).then(function() {
+    return lut;
+  });
 }
 
 function testSearch(example) {

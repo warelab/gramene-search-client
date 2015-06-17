@@ -26,6 +26,7 @@ var resultTypes = {
       'epl_gene_tree' : 'unique(epl_gene_tree)'
     }
   }
+  // TODO consider adding `pivot` result type, e.g. for gene_tree analysis we'd like to do this: http://data.gramene.org/search/genes?q=*&rows=0&facet=true&facet.pivot=grm_gene_tree_root_taxon_id,grm_gene_tree
 };
 
 module.exports = {

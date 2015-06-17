@@ -90,7 +90,7 @@ function coreLookup(coreName,ids,userParams) {
 }
 
 function testSearch(example) {
-  return Q(require('../spec/support/searchResult')[example])
+  return Q(_.cloneDeep(require('../spec/support/searchResult')[example]))
     .then(reformatData('genes'));
 }
 

@@ -2,7 +2,6 @@
 var _ = require('lodash');
 
 var rootURL = 'http://data.gramene.org/search/';
-var suggestURL = 'http://data.gramene.org/suggest/';
 function isNumeric(fieldName) {
   return fieldName && (
     _.endsWith(fieldName, '_i') ||
@@ -11,50 +10,9 @@ function isNumeric(fieldName) {
     fieldName === '_genes'
   );
 }
-function suggestParams(queryString) {
-  queryString += '*';
-  if (queryString.match(/\s/)) {
-    queryString = '\''+queryString+'\'';
-  }
-  return {
-    q: queryString,
-    fl: '_terms,id,_genes,id_s,name_s',
-    sort: '_genes desc'
-  };
-}
-function suggestFormatter(response,queryString,core) {
-  // this function reformats the responses from the aux cores
-  // there is another defined for genes
-  var reList = queryString.split(/\s/);
-  for(var i=0;i<reList.length;i++) {
-    var term = reList[i];
-    if (i+1==reList.length) {
-      reList[i] = new RegExp('\\b(' + term + ')', 'gi');
-    }
-    else {
-      reList[i] = new RegExp('\\b(' + term + ')\\b', 'gi');
-    }
-  }
-  var suggestions = [];
-  response.data.response.docs.forEach(function(doc){
-    var hl = doc._terms;
-    reList.forEach(function(re) {
-      hl= hl.replace(re,'<em>$1</em>');
-    });
-    suggestions.push({
-      term: hl,
-      weight: doc._genes,
-      fq: cores[core].fqField+':'+doc.id,
-      name: doc.name_s,
-      id: doc.id_s
-    });
-  });
-  return suggestions;
-}
 var cores = {
   genes: {
     displayName: 'Genes',
-    fqField: 'text',
     xref: {
       taxon_id: {core: 'taxonomy', displayName: 'Species'},
       interpro_xrefi: {core: 'interpro', displayName: 'Domain'},
@@ -71,57 +29,23 @@ var cores = {
         fieldName === 'end' ||
         fieldName === 'strand'
       );
-    },
-    suggestUrl: suggestURL,
-    suggestParams: function(queryString) {
-      return {
-        q:queryString
-      }
-    },
-    suggestFormatter: function(response,queryString,core) {
-      var suggestions = response.data.suggest.terms[queryString].suggestions;
-      return suggestions.map(function(sug) {
-        var cleanTerm = sug.term.replace(/<\/?b>/g,'');
-        sug.term = sug.term.replace(/b>/g,'em>');
-        sug.fq = cores[core].fqField+':'+cleanTerm;
-        sug.label = cleanTerm;
-        delete(sug.payload);
-        return sug;
-      });
-      return suggestions;
     }
   },
   taxonomy: {
     displayName: 'Taxonomy',
-    fqField:'NCBITaxon_ancestors',
-    isNumeric: isNumeric,
-    suggestUrl: rootURL,
-    suggestParams: suggestParams,
-    suggestFormatter: suggestFormatter
+    isNumeric: isNumeric
   },
   interpro: {
     displayName: 'Domains',
-    fqField:'interpro_ancestors',
-    isNumeric: isNumeric,
-    suggestUrl: rootURL,
-    suggestParams: suggestParams,
-    suggestFormatter: suggestFormatter
+    isNumeric: isNumeric
   },
   GO: {
     displayName: 'Gene ontology',
-    fqField:'GO_ancestors',
-    isNumeric: isNumeric,
-    suggestUrl: rootURL,
-    suggestParams: suggestParams,
-    suggestFormatter: suggestFormatter
+    isNumeric: isNumeric
   },
   PO: {
     displayName: 'Plant ontology',
-    fqField:'PO_ancestors',
-    isNumeric: isNumeric,
-    suggestUrl: rootURL,
-    suggestParams: suggestParams,
-    suggestFormatter: suggestFormatter
+    isNumeric: isNumeric
   }
 };
 
@@ -148,14 +72,3 @@ exports.valuesAreNumeric = function (core, fieldName) {
 exports.coreNames = function() {
   return Object.keys(cores);
 };
-
-exports.getSuggestUrl = function(core) {
-  return cores[core].suggestUrl + core + '?';
-}
-exports.getSuggestParams = function(core, queryString) {
-  return cores[core].suggestParams(queryString);
-}
-
-exports.handleSuggestResponse = function(core, response, queryString) {
-  return cores[core].suggestFormatter(response,queryString,core);
-}

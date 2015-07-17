@@ -19,7 +19,7 @@ describe('solrCores', function () {
     });
   });
   
-  it('should provide a URL for making suggestions', function () {
+  xit('should provide a URL for making suggestions', function () {
     expect(solrCores.getSuggestUrl('genes')).toEqual('http://data.gramene.org/suggest/genes?');
     expect(solrCores.getSuggestUrl('GO')).toEqual('http://data.gramene.org/search/GO?');
   });

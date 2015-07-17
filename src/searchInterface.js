@@ -1,6 +1,7 @@
 'use strict';
 
 var cores = require('./solrCores');
+var suggesters = require('./suggesters');
 var axios = require('axios');
 var _ = require('lodash');
 var Q = require('q');
@@ -15,20 +16,20 @@ function geneSearch(query) {
 }
 
 function suggest(queryString) {
-  var coreRequests = cores.coreNames().map(function(coreName) {
-    var url = cores.getSuggestUrl(coreName);
-    var params = cores.getSuggestParams(coreName,queryString);
+  var sugRequests = suggesters.suggesterNames().map(function(sugName) {
+    var url = suggesters.getSuggestUrl(sugName);
+    var params = suggesters.getSuggestParams(sugName,queryString);
     return axios.get(url, {params: params});
   });
   
-  return axios.all(coreRequests)
-    .then(function(coreResponses) {
+  return axios.all(sugRequests)
+    .then(function(sugResponses) {
       var data = [];
-      var coreNames = cores.coreNames();
-      for(var i=0; i<coreNames.length; i++) {
+      var sugNames = suggesters.suggesterNames();
+      for(var i=0; i<sugNames.length; i++) {
         data.push({
-          label: cores.getCoreDisplayName(coreNames[i]),
-          suggestions: cores.handleSuggestResponse(coreNames[i], coreResponses[i], queryString)
+          label: suggesters.getDisplayName(sugNames[i]),
+          suggestions: suggesters.handleSuggestResponse(sugNames[i], sugResponses[i], queryString)
         });
       }
       return data;

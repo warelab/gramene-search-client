@@ -35,6 +35,7 @@ function suggestFormatter(response,queryString,type) {
     reList.forEach(function(re) {
       hl= hl.replace(re,'<em>$1</em>');
     });
+    hl = hl.replace(/\S+\s\|\s/,'');
     suggestions.push({
       term: hl,
       weight: doc._genes,

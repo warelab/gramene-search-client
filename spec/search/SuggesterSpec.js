@@ -13,7 +13,7 @@ describe('suggesters', function () {
 
   it('should provide a URL for making suggestions', function () {
     expect(suggesters.getSuggestUrl('text')).toEqual('http://data.gramene.org/suggest/genes?');
-    expect(suggesters.getSuggestUrl('GO')).toEqual('http://data.gramene.org/search/GO?');
+    expect(suggesters.getSuggestUrl('GO_f')).toEqual('http://data.gramene.org/search/GO?');
   });
 
   it('should not provide a URL for anything that\'s not a suggester', function () {

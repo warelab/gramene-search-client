@@ -22,4 +22,14 @@ describe('suggesters', function () {
       expect(thrower).toThrow();
     });
   });
+
+  it('should filter GO suggestions based on namespace', function () {
+    var fParams = suggesters.getSuggestParams('GO_f', 'hello');
+    var pParams = suggesters.getSuggestParams('GO_p', 'hello');
+    var cParams = suggesters.getSuggestParams('GO_c', 'hello');
+
+    expect(fParams.fq).toEqual("namespace_s:molecular_function");
+    expect(pParams.fq).toEqual("namespace_s:biological_process");
+    expect(cParams.fq).toEqual("namespace_s:cellular_component");
+  })
 });

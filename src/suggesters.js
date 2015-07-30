@@ -16,6 +16,14 @@ function suggestParams(queryString) {
   };
 }
 
+function goParams(goNamespace) {
+  return function(queryString) {
+    var result = suggestParams(queryString);
+    result.fq = "namespace_s:" + goNamespace;
+    return result
+  }
+}
+
 function suggestFormatter(response,queryString,type) {
   // this function reformats the responses from the aux cores
   // there is another defined for genes
@@ -124,11 +132,32 @@ var suggesters = {
     suggestParams: suggestParams,
     suggestFormatter: suggestFormatter
   },
-  GO: {
-    displayName: 'Gene ontology',
+  //GO: {
+  //  displayName: 'Gene ontology',
+  //  fqField:'GO_ancestors',
+  //  suggestUrl: rootURL+'GO',
+  //  suggestParams: suggestParams,
+  //  suggestFormatter: suggestFormatter
+  //},
+  "GO_c": {
+    displayName: 'GO component',
     fqField:'GO_ancestors',
     suggestUrl: rootURL+'GO',
-    suggestParams: suggestParams,
+    suggestParams: goParams("cellular_component"),
+    suggestFormatter: suggestFormatter
+  },
+  "GO_f": {
+    displayName: 'GO function',
+    fqField:'GO_ancestors',
+    suggestUrl: rootURL+'GO',
+    suggestParams: goParams("molecular_function"),
+    suggestFormatter: suggestFormatter
+  },
+  "GO_p": {
+    displayName: 'GO process',
+    fqField:'GO_ancestors',
+    suggestUrl: rootURL+'GO',
+    suggestParams: goParams("biological_process"),
     suggestFormatter: suggestFormatter
   },
   PO: {

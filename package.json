@@ -1,6 +1,6 @@
 {
   "name": "@warelab/gramene-search-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Javascript client for searching Gramene's API",
   "main": "index.js",
   "scripts": {

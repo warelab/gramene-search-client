@@ -20,45 +20,39 @@ var suggesters = {
   },
   taxonomy: {
     displayName: 'Taxonomy',
-    fqField: 'NCBITaxon_ancestors',
     suggestUrl: rootURL+'taxonomy',
     suggestParams: helpers.params.default,
-    suggestFormatter: helpers.formatters.default
+    suggestFormatter: helpers.formatters.forFqField('NCBITaxon_ancestors')
   },
   interpro: {
     displayName: 'Domains',
-    fqField:'interpro_ancestors',
     suggestUrl: rootURL+'interpro',
     suggestParams: helpers.params.default,
-    suggestFormatter: helpers.formatters.default
+    suggestFormatter: helpers.formatters.forFqField('interpro_ancestors')
   },
   "GO_c": {
     displayName: 'GO component',
-    fqField:'GO_ancestors',
     suggestUrl: rootURL+'GO',
     suggestParams: helpers.params.goFactory("cellular_component"),
-    suggestFormatter: helpers.formatters.default
+    suggestFormatter: helpers.formatters.forFqField('GO_ancestors')
   },
   "GO_f": {
     displayName: 'GO function',
-    fqField:'GO_ancestors',
     suggestUrl: rootURL+'GO',
     suggestParams: helpers.params.goFactory("molecular_function"),
-    suggestFormatter: helpers.formatters.default
+    suggestFormatter: helpers.formatters.forFqField('GO_ancestors')
   },
   "GO_p": {
     displayName: 'GO process',
-    fqField:'GO_ancestors',
     suggestUrl: rootURL+'GO',
     suggestParams: helpers.params.goFactory("biological_process"),
-    suggestFormatter: helpers.formatters.default
+    suggestFormatter: helpers.formatters.forFqField('GO_ancestors')
   },
   PO: {
     displayName: 'Plant ontology',
-    fqField:'PO_ancestors',
     suggestUrl: rootURL+'PO',
     suggestParams: helpers.params.default,
-    suggestFormatter: helpers.formatters.default
+    suggestFormatter: helpers.formatters.forFqField('PO_ancestors')
   }
 };
 

@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var helpers = {
   params: {
     default: function defaultSuggestParams(queryString) {
@@ -40,35 +42,36 @@ var helpers = {
   },
 
   formatters: {
-    default: function suggestFormatter(response, queryString, type) {
-      // this function reformats the responses from the aux cores
-      // there is another defined for genes
-      var reList = queryString.split(/\s/);
-      for (var i = 0; i < reList.length; i++) {
-        var term = reList[i];
-        if (i + 1 == reList.length) {
-          reList[i] = new RegExp('\\b(' + term + ')', 'gi');
+    forFqField: function forFqFieldFactory(fqField) {
+      return function suggestFormatter(response, queryString) {
+        // this function reformats the responses from the aux cores
+        // there is another defined for genes
+        var reList = queryString.split(/\s/);
+        for (var i = 0; i < reList.length; i++) {
+          var term = reList[i];
+          if (i + 1 == reList.length) {
+            reList[i] = new RegExp('\\b(' + term + ')', 'gi');
+          }
+          else {
+            reList[i] = new RegExp('\\b(' + term + ')\\b', 'gi');
+          }
         }
-        else {
-          reList[i] = new RegExp('\\b(' + term + ')\\b', 'gi');
-        }
+
+        return response.data.response.docs.map(function (doc) {
+          var hl = doc._terms;
+          reList.forEach(function (re) {
+            hl = hl.replace(re, '<em>$1</em>');
+          });
+          hl = hl.replace(/\S+\s\|\s/, '');
+          return {
+            term: hl,
+            weight: doc._genes,
+            fq: fqField + ':' + doc.id,
+            name: doc.name_s,
+            id: doc.id_s
+          };
+        });
       }
-      var suggestions = [];
-      response.data.response.docs.forEach(function (doc) {
-        var hl = doc._terms;
-        reList.forEach(function (re) {
-          hl = hl.replace(re, '<em>$1</em>');
-        });
-        hl = hl.replace(/\S+\s\|\s/, '');
-        suggestions.push({
-          term: hl,
-          weight: doc._genes,
-          fq: suggesters[type].fqField + ':' + doc.id,
-          name: doc.name_s,
-          id: doc.id_s
-        });
-      });
-      return suggestions;
     },
 
     text: function textSuggestFormatter(response, queryString) {
@@ -83,7 +86,7 @@ var helpers = {
       });
     },
 
-    genes: function genesSuggestFormatter(response, queryString, type) {
+    genes: function genesSuggestFormatter(response, queryString) {
       var queryRegexp = new RegExp('\\b' + queryString, 'i');
       var suggestions = _(response.data.response.docs)
         .forEach(function (doc) {

@@ -107,7 +107,7 @@ var helpers = {
             id: doc.id
           };
         })
-        .sort('weight')
+        .sortBy('weight')
         .slice(0, 10);
 
       return suggestions.value();

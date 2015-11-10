@@ -1,6 +1,6 @@
-module.exports = {
-  default: {
-    data: {
+{
+  "default": {
+    "data": {
       "responseHeader": {
         "status": 0,
         "QTime": 0,
@@ -25,8 +25,8 @@ module.exports = {
     }
   },
 
-  tally: {
-    data: {
+  "tally": {
+    "data": {
       "responseHeader": {
         "status":0,
         "QTime":391,
@@ -50,8 +50,8 @@ module.exports = {
     }
   },
   
-  faceted: {
-    data: {
+  "faceted": {
+    "data": {
       "responseHeader": {
         "status": 0,
         "QTime": 121,
@@ -117,8 +117,8 @@ module.exports = {
     }
   },
 
-  rows10: {
-    data: {
+  "rows10": {
+    "data": {
       "responseHeader": {
         "status": 0,
         "QTime": 0,
@@ -1749,8 +1749,8 @@ module.exports = {
     }
   },
 
-  binned: {
-    data: {
+  "binned": {
+    "data": {
       "responseHeader": {
         "status": 0,
         "QTime": 2,
@@ -2886,4 +2886,4 @@ module.exports = {
       }
     }
   }
-};
+}

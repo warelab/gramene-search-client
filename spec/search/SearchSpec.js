@@ -1,6 +1,6 @@
 var axios = require('axios');
 var Q = require('q');
-var resultFixtures = require('../support/searchResult');
+var resultFixtures = require('../support/searchResult48');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 

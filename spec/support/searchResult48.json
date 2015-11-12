@@ -1,6 +1,6 @@
 {
   "default": {
-    "data": {
+    "obj": {
       "responseHeader": {
         "status": 0,
         "QTime": 0,
@@ -27,7 +27,7 @@
     }
   },
   "tally": {
-    "data": {
+    "obj": {
       "responseHeader": {
         "status": 0,
         "QTime": 2773,
@@ -53,7 +53,7 @@
     }
   },
   "faceted": {
-    "data": {
+    "obj": {
       "responseHeader": {
         "status": 0,
         "QTime": 254,
@@ -160,7 +160,7 @@
     }
   },
   "rows10": {
-    "data": {
+    "obj": {
       "responseHeader": {
         "status": 0,
         "QTime": 0,
@@ -215,14 +215,14 @@
             "canonical_translation": "Bo3g078760.1",
             "canonical_translation_length": 213,
             "grm_gene_tree_root_taxon_id": 3398,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "epl_gene_tree": "EPlGT00140000004605",
             "grm_gene_tree": "EPlGT00140000004605",
             "UniParc_xrefs": [
@@ -302,14 +302,14 @@
             "canonical_translation": "Bo3g078780.1",
             "canonical_translation_length": 523,
             "grm_gene_tree_root_taxon_id": 2759,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "domainRoots": "15813",
             "domainList": [
               15813
@@ -439,14 +439,14 @@
             "canonical_translation": "Bo3g078790.1",
             "canonical_translation_length": 306,
             "grm_gene_tree_root_taxon_id": 2759,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "domainRoots": "23342 1623",
             "domainList": [
               1623,
@@ -549,14 +549,14 @@
             "canonical_translation": "Bo3g078810.1",
             "canonical_translation_length": 396,
             "grm_gene_tree_root_taxon_id": 3705,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "epl_gene_tree": "EPlGT00780000089234",
             "grm_gene_tree": "EPlGT00780000089234",
             "UniParc_xrefs": [
@@ -644,14 +644,14 @@
             "canonical_translation": "Bo3g078820.1",
             "canonical_translation_length": 486,
             "grm_gene_tree_root_taxon_id": 3398,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "epl_gene_tree": "EPlGT00230000079860",
             "grm_gene_tree": "__EPlSupertree120287",
             "UniParc_xrefs": [
@@ -746,14 +746,14 @@
             "canonical_translation": "Bo3g078830.1",
             "canonical_translation_length": 477,
             "grm_gene_tree_root_taxon_id": 3398,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "epl_gene_tree": "EPlGT00230000079860",
             "grm_gene_tree": "__EPlSupertree120287",
             "UniParc_xrefs": [
@@ -852,14 +852,14 @@
             "canonical_translation": "Bo3g078840.1",
             "canonical_translation_length": 240,
             "grm_gene_tree_root_taxon_id": 2759,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "domainRoots": "29020",
             "domainList": [
               24041,
@@ -964,14 +964,14 @@
             "canonical_translation": "Bo3g078860.1",
             "canonical_translation_length": 352,
             "grm_gene_tree_root_taxon_id": 3705,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "domainRoots": "15410",
             "domainList": [
               15410
@@ -1059,14 +1059,14 @@
             "canonical_translation": "Bo3g078870.1",
             "canonical_translation_length": 466,
             "grm_gene_tree_root_taxon_id": 3398,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "epl_gene_tree": "EPlGT00230000079860",
             "grm_gene_tree": "__EPlSupertree120287",
             "UniParc_xrefs": [
@@ -1156,14 +1156,14 @@
             "canonical_translation": "Bo3g078900.1",
             "canonical_translation_length": 209,
             "grm_gene_tree_root_taxon_id": 3700,
-            "fixed_100_bin": 2537,
-            "fixed_200_bin": 5064,
-            "fixed_500_bin": 12649,
-            "fixed_1000_bin": 25290,
-            "uniform_1Mb_bin": 16582,
-            "uniform_2Mb_bin": 8380,
-            "uniform_5Mb_bin": 3463,
-            "uniform_10Mb_bin": 1821,
+            "fixed_100__bin": 2537,
+            "fixed_200__bin": 5064,
+            "fixed_500__bin": 12649,
+            "fixed_1000__bin": 25290,
+            "uniform_1Mb__bin": 16582,
+            "uniform_2Mb__bin": 8380,
+            "uniform_5Mb__bin": 3463,
+            "uniform_10Mb__bin": 1821,
             "domainRoots": "12337",
             "domainList": [
               12337
@@ -1216,7 +1216,7 @@
     }
   },
   "binned": {
-    "data": {
+    "obj": {
       "responseHeader": {
         "status": 0,
         "QTime": 259,
@@ -1226,7 +1226,7 @@
           "start": "0",
           "q": "*",
           "facet.limit": "-1",
-          "facet.field": "fixed_200_bin",
+          "facet.field": "fixed_200__bin",
           "wt": "json",
           "fq": "Interpro_xrefs:(IPR008978 IPR002068)",
           "rows": "0"
@@ -1240,7 +1240,7 @@
       "facet_counts": {
         "facet_queries": {},
         "facet_fields": {
-          "fixed_200_bin": [
+          "fixed_200__bin": [
             "0",
             17,
             "1",

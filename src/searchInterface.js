@@ -1,11 +1,10 @@
 'use strict';
 
-var cores = require('./solrCores');
 var _ = require('lodash');
+var Q = require('q');
 
 var grameneClientPromise = (function() {
-  var Q = require('q');
-  var Client = require('swagger-client-promises');
+  var Client = require('swagger-client');
   var deferred = Q.defer();
   var gramene = new Client({url: 'http://brie.cshl.edu:10010/swagger', success: function() {
     deferred.resolve(gramene);
@@ -16,20 +15,22 @@ var grameneClientPromise = (function() {
 function geneSearch(query) {
   return grameneClientPromise
     .then(function(gramene) {
-      console.log('will ask for gene search docs');
+      var deferred = Q.defer();
       var params = getSolrParameters(query);
       params.collection = 'genes';
-      return gramene['Search'].genes(params);
+      gramene['Search'].genes(params, deferred.resolve);
+      return deferred.promise;
     })
-    .then(reformatData('genes'));
+    .then(reformatData);
 }
 
 function suggest(queryString) {
   return grameneClientPromise
     .then(function(gramene) {
+      var deferred = Q.defer();
       var params = {q: queryString ? queryString + '*' : '*'};
-      console.log('will ask for suggestions for ' + params.q);
-      return gramene['Search'].suggestions(params);
+      gramene['Search'].suggestions(params, deferred.resolve);
+      return deferred.promise;
     })
     .then(function(response) {
       // the following line is a safer equivalent of
@@ -53,7 +54,7 @@ function suggest(queryString) {
 
 function testSearch(example) {
   return Q(_.cloneDeep(require('../spec/support/searchResult48')[example]))
-    .then(reformatData('genes'));
+    .then(reformatData);
 }
 
 function defaultSolrParameters() {
@@ -101,40 +102,51 @@ function getSolrParameters(query) {
   return result;
 }
 
-function reformatData(core) {
-  return function(response) {
-    console.log('reformatting data');
-    var data = response.obj;
-    var fixed = {};
-    
-    if (data.facet_counts) {
-      var originalFacets = data.facet_counts.facet_fields;
-      if(originalFacets && !data.results) {
-        fixed = data.results = {};
-        for(var f in originalFacets) {
-          fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(core,f), cores.getXrefDisplayName(core,f));
-        }
-        delete data.facet_counts;
-      }
-    }
-        
-    if(data.response.docs.length) {
-      fixed.list = data.response.docs;
-    }
-    fixed.metadata = {
-      count: data.response.numFound,
-      qtime: data.responseHeader.QTime
-    };
+function reformatData(response) {
+  var data = response.obj;
+  var fixed = {};
 
-    if (data.facets) {
-      fixed.tally={};
-      for(var f in data.facets) {
-        fixed.tally[f] = data.facets[f];
+  if (data.facet_counts) {
+    var originalFacets = data.facet_counts.facet_fields;
+    if(originalFacets && !data.results) {
+      fixed = data.results = {};
+      for(var f in originalFacets) {
+        fixed[f] = reformatFacet(originalFacets[f], isSearchFieldNumeric(f), f);
       }
+      delete data.facet_counts;
     }
-
-    return fixed;
   }
+
+  if(data.response.docs.length) {
+    fixed.list = data.response.docs;
+  }
+  fixed.metadata = {
+    count: data.response.numFound,
+    qtime: data.responseHeader.QTime
+  };
+
+  if (data.facets) {
+    fixed.tally={};
+    for(var f in data.facets) {
+      fixed.tally[f] = data.facets[f];
+    }
+  }
+
+  return fixed;
+}
+
+function isSearchFieldNumeric(fieldName) {
+  return fieldName && (
+      _.endsWith(fieldName, '__bin') ||
+      _.endsWith(fieldName, '__ancestors') ||
+      _.startsWith(fieldName, 'transcript__') ||
+      _.startsWith(fieldName, 'protein__') ||
+      fieldName === 'taxon_id' ||
+      fieldName === 'start' ||
+      fieldName === 'end' ||
+      fieldName === 'gene_idx' ||
+      fieldName === 'strand'
+    );
 }
 
 function reformatFacet(facetData, numericIds, displayName) {
@@ -163,5 +175,6 @@ function reformatFacet(facetData, numericIds, displayName) {
 
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
+exports._grameneClientPromise = grameneClientPromise;
 exports.suggest = suggest;
 //exports.coreLookup = coreLookup;

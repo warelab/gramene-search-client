@@ -1,98 +1,60 @@
 'use strict';
 
-var cores = require('./solrCores');
-var suggesters = require('./suggesters');
-var axios = require('axios');
 var _ = require('lodash');
 var Q = require('q');
 
-function geneSearch(query) {
-  var coreName = 'genes';
-  var url = cores.getUrlForCore(coreName);
-  var params = getSolrParameters(query);
+var grameneClientPromise = (function() {
+  var Client = require('swagger-client');
+  var deferred = Q.defer();
+  var gramene = new Client({url: 'http://brie.cshl.edu:10010/swagger', success: function() {
+    deferred.resolve(gramene);
+  }});
+  return deferred.promise;
+})();
 
-  return axios.get(url, {params: params})
-    .then(reformatData(coreName));
+function geneSearch(query) {
+  return grameneClientPromise
+    .then(function(gramene) {
+      var deferred = Q.defer();
+      var params = getSolrParameters(query);
+      params.collection = 'genes';
+      gramene['Search'].genes(params, deferred.resolve);
+      return deferred.promise;
+    })
+    .then(reformatData);
 }
 
 function suggest(queryString) {
-  var sugRequests = suggesters.suggesterNames().map(function(sugName) {
-    var url = suggesters.getSuggestUrl(sugName);
-    var params = suggesters.getSuggestParams(sugName,queryString);
-    return axios.get(url, {params: params});
-  });
-  
-  return axios.all(sugRequests)
-    .then(function(sugResponses) {
-      var data = [];
-      var sugNames = suggesters.suggesterNames();
-      for(var i=0; i<sugNames.length; i++) {
-        data.push({
-          label: suggesters.getDisplayName(sugNames[i]),
-          suggestions: suggesters.handleSuggestResponse(sugNames[i], sugResponses[i], queryString)
-        });
-      }
-      return data;
+  return grameneClientPromise
+    .then(function(gramene) {
+      var deferred = Q.defer();
+      var params = {q: queryString ? queryString + '*' : '*'};
+      gramene['Search'].suggestions(params, deferred.resolve);
+      return deferred.promise;
+    })
+    .then(function(response) {
+      // the following line is a safer equivalent of
+      // `return response.obj.grouped.category.groups.map(function(category) {`
+      return _.get(response, 'obj.grouped.category.groups').map(function(category) {
+        var doclist = category.doclist;
+        if(!category.doclist) {
+          console.error('No doclist for category ', category);
+          return;
+        }
+
+        return {
+          label: category.groupValue,
+          suggestions: doclist.docs,
+          maxScore: doclist.maxScore,
+          numFound: doclist.numFound
+        }
+      });
     });
 }
 
-function coreLookup(coreName,ids,userParams) {
-  var url = 'http://data.gramene.org/' + coreName + '/select';
-  var idList;
-  if (Array.isArray(ids)) {
-    idList = _.uniq(ids);
-  } else {
-    idList = [ids];
-  }
-  var queryField = '_id';
-
-  var p = _.cloneDeep(userParams);
-  if (!p) p={};
-  if (p.field) {
-    queryField = p.field;
-    delete p.field;
-  }
-
-  if (p.fl && !_.includes(p.fl,queryField)) {
-     p.fl.push(queryField);
-     p.fl = p.fl.join(',');
-  }
-  // idList may be too long, so we split into batches
-  var batchSize=100;
-  var promises = [];
-  var offset=0;
-  var lut={};
-  while (offset < idList.length) {
-    var params = {
-      rows:-1 // because batchSize might be < number of matched docs
-    };
-    params[queryField] = idList.slice(offset,offset+batchSize);
-    for(var f in p) {
-      params[f] = p[f];
-    }
-    offset += batchSize;
-    promises.push(axios.get(url, {params: params})
-    .then(function(response) {
-      response.data.response.forEach(function(doc) {
-        var k = doc[queryField];
-        delete doc[queryField];
-        if (lut[k]) {
-          lut[k].push(doc);
-        }
-        else {
-          lut[k] = [doc];
-        }
-      });
-    }));
-  }
-  return axios.all(promises).then(function() {
-    return lut;
-  });
-}
-
 function testSearch(example) {
-  return Q(_.cloneDeep(require('../spec/support/searchResult')[example]))
-    .then(reformatData('genes'));
+  return Q(_.cloneDeep(require('../spec/support/searchResult48')[example]))
+    .then(reformatData);
 }
 
 function defaultSolrParameters() {
@@ -140,39 +102,51 @@ function getSolrParameters(query) {
   return result;
 }
 
-function reformatData(core) {
-  return function(response) {
-    var data = response.data;
-    var fixed = {};
-    
-    if (data.facet_counts) {
-      var originalFacets = data.facet_counts.facet_fields;
-      if(originalFacets && !data.results) {
-        fixed = data.results = {};
-        for(var f in originalFacets) {
-          fixed[f] = reformatFacet(originalFacets[f], cores.valuesAreNumeric(core,f), cores.getXrefDisplayName(core,f));
-        }
-        delete data.facet_counts;
-      }
-    }
-        
-    if(data.response.docs.length) {
-      fixed.list = data.response.docs;
-    }
-    fixed.metadata = {
-      count: data.response.numFound,
-      qtime: data.responseHeader.QTime
-    };
+function reformatData(response) {
+  var data = response.obj;
+  var fixed = {};
 
-    if (data.facets) {
-      fixed.tally={};
-      for(var f in data.facets) {
-        fixed.tally[f] = data.facets[f];
+  if (data.facet_counts) {
+    var originalFacets = data.facet_counts.facet_fields;
+    if(originalFacets && !data.results) {
+      fixed = data.results = {};
+      for(var f in originalFacets) {
+        fixed[f] = reformatFacet(originalFacets[f], isSearchFieldNumeric(f), f);
       }
+      delete data.facet_counts;
     }
-
-    return fixed;
   }
+
+  if(data.response.docs.length) {
+    fixed.list = data.response.docs;
+  }
+  fixed.metadata = {
+    count: data.response.numFound,
+    qtime: data.responseHeader.QTime
+  };
+
+  if (data.facets) {
+    fixed.tally={};
+    for(var f in data.facets) {
+      fixed.tally[f] = data.facets[f];
+    }
+  }
+
+  return fixed;
+}
+
+function isSearchFieldNumeric(fieldName) {
+  return fieldName && (
+      _.endsWith(fieldName, '__bin') ||
+      _.endsWith(fieldName, '__ancestors') ||
+      _.startsWith(fieldName, 'transcript__') ||
+      _.startsWith(fieldName, 'protein__') ||
+      fieldName === 'taxon_id' ||
+      fieldName === 'start' ||
+      fieldName === 'end' ||
+      fieldName === 'gene_idx' ||
+      fieldName === 'strand'
+    );
 }
 
 function reformatFacet(facetData, numericIds, displayName) {
@@ -201,5 +175,6 @@ function reformatFacet(facetData, numericIds, displayName) {
 
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
+exports._grameneClientPromise = grameneClientPromise;
 exports.suggest = suggest;
-exports.coreLookup = coreLookup;
+//exports.coreLookup = coreLookup;

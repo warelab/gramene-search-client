@@ -1,6 +1,6 @@
 {
   "name": "gramene-search-client",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Javascript client for searching Gramene's API",
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,9 @@
     "jasmine-pit": "^2.0.2"
   },
   "dependencies": {
-    "axios": "^0.5.2",
     "lodash": "^3.6.0",
-    "q": "^1.2.0"
+    "q": "^1.2.0",
+    "swagger-client": "^2.1.6"
   },
   "author": "mycrobe",
   "license": "MIT"

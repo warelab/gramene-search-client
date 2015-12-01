@@ -6,7 +6,7 @@ var Q = require('q');
 var grameneClientPromise = (function() {
   var Client = require('swagger-client');
   var deferred = Q.defer();
-  var gramene = new Client({url: 'http://brie.cshl.edu:10010/swagger', success: function() {
+  var gramene = new Client({url: 'http://devdata.gramene.org/swagger', success: function() {
     deferred.resolve(gramene);
   }});
   return deferred.promise;

@@ -6,17 +6,16 @@ var _ = require('lodash');
 jasminePit.install(global);
 require('jasmine-expect');
 
+var searchInterface = require('../../src/searchInterface')
+var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
+
 describe('geneSearch', function () {
 
-  var searchInterface, expectedResult;
-
-  beforeEach(function () {
-    searchInterface = require('../../src/searchInterface');
-  });
+  var expectedResult;
 
   function setExpectedResultAndGetSearchPromise(name, params) {
     expectedResult = resultFixtures[name];
-    spyOn(searchInterface._grameneClientPromise, 'then').andReturn(Q(_.cloneDeep(expectedResult)));
+    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(expectedResult)));
     return searchInterface.geneSearch(params);
   }
 

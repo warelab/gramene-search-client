@@ -26,6 +26,5 @@ function testSearch(example) {
 
 exports.geneSearch = geneSearch;
 exports._testSearch = testSearch;
-exports._grameneClientPromise = grameneSwaggerClient;
 exports.suggest = suggest;
 //exports.coreLookup = coreLookup;

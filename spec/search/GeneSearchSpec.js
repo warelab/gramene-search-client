@@ -1,4 +1,3 @@
-var axios = require('axios');
 var Q = require('q');
 var resultFixtures = require('../support/searchResult48');
 var jasminePit = require('jasmine-pit');
@@ -7,7 +6,7 @@ var _ = require('lodash');
 jasminePit.install(global);
 require('jasmine-expect');
 
-describe('searchInterface', function () {
+describe('geneSearch', function () {
 
   var searchInterface, expectedResult;
 
@@ -85,30 +84,6 @@ describe('searchInterface', function () {
     return searchInterface._testSearch('binned').then(function(data) {
       expect(data).toBeDefined();
     })
-  });
-  
-  pit('axios.all should behave as expected', function() {
-    // given 
-    spyOn(axios, 'get');
-    var url = 'http://whatever';
-    
-    // when
-    return axios.all([
-      axios.get(url, {params: {foo:'bar'}}),
-      axios.get(url, {params: {foo:'baz'}})
-    ]).then(function(a, b) {
-      
-      // then
-      expect(axios.get.calls.length).toEqual(2);
-      
-      var call0 = axios.get.calls[0];
-      var call1 = axios.get.calls[1];
-      
-      expect(call0.args[0]).toEqual(url);
-      expect(call0.args[1].params.foo).toEqual('bar');
-      expect(call1.args[0]).toEqual(url);
-      expect(call1.args[1].params.foo).toEqual('baz');
-    });
   });
   
 });

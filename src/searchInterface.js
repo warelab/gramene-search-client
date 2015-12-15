@@ -3,28 +3,14 @@
 var _ = require('lodash');
 var Q = require('q');
 
-var grameneSwaggerClient = require('./grameneSwaggerClient');
-var geneSearchLib = require('./geneSearch');
-var suggestLib = require('./suggest');
-
-function geneSearch(query) {
-  return grameneSwaggerClient
-    .then(geneSearchLib.makeCall)
-    .then(geneSearchLib.reformatResponse);
-}
-
-function suggest(queryString) {
-  return grameneSwaggerClient
-    .then(suggestLib.makeCall)
-    .then(suggestLib.reformatResponse);
-}
+var geneSearch = require('./geneSearch');
+var suggest = require('./suggest');
 
 function testSearch(example) {
   return Q(_.cloneDeep(require('../spec/support/searchResult48')[example]))
     .then(geneSearch.reformatResponse);
 }
 
-exports.geneSearch = geneSearch;
+exports.geneSearch = geneSearch.promise;
+exports.suggest = suggest.promise;
 exports._testSearch = testSearch;
-exports.suggest = suggest;
-//exports.coreLookup = coreLookup;

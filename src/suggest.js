@@ -3,19 +3,21 @@
 var _ = require('lodash');
 var Q = require('q');
 
-function makeSuggestCall(gramene) {
+var grameneSwaggerClient = require('./grameneSwaggerClient');
+
+function makeCall(gramene) {
   var deferred = Q.defer();
   var params = {q: queryString ? queryString + '*' : '*'};
   gramene['Search'].suggestions(params, deferred.resolve);
   return deferred.promise;
 }
 
-function handleSuggestResponse(response) {
+function reformatResponse(response) {
   // the following line is a safer equivalent of
   // `return response.obj.grouped.category.groups.map(function(category) {`
-  return _.get(response, 'obj.grouped.category.groups').map(function(category) {
+  return _.get(response, 'obj.grouped.category.groups').map(function (category) {
     var doclist = category.doclist;
-    if(!category.doclist) {
+    if (!category.doclist) {
       console.error('No doclist for category ', category);
       return;
     }
@@ -29,7 +31,17 @@ function handleSuggestResponse(response) {
   });
 }
 
+function promise(queryString) {
+  return grameneSwaggerClient
+    .then(function (query) {
+      return makeCall(query)
+    })
+    .then(reformatResponse)
+}
+
+
 module.exports = {
-  makeCall: makeSuggestCall,
-  reformatResponse: handleSuggestResponse
+  makeCall: makeCall,
+  reformatResponse: reformatResponse,
+  promise: promise
 }

@@ -6,83 +6,94 @@ var _ = require('lodash');
 jasminePit.install(global);
 require('jasmine-expect');
 
-var searchInterface = require('../../src/searchInterface')
-var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
 
 describe('geneSearch', function () {
 
+  var searchInterface = require('../../src/searchInterface')
+  var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
+
   var expectedResult;
 
-  function setExpectedResultAndGetSearchPromise(name, params) {
-    expectedResult = resultFixtures[name];
-    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(expectedResult)));
-    return searchInterface.geneSearch(params);
+  function setExpectedResultAndGetSearchPromise(name) {
+    var fixture = resultFixtures[name];
+    expectedResult = fixture.response.obj;
+
+    // comment out this line to test with real server
+    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
+
+    return searchInterface.geneSearch(fixture.query);
   }
 
   function checkResultCounts(searchResult) {
     expect(searchResult).toBeDefined();
     expect(searchResult.metadata).toBeDefined();
-    expect(searchResult.metadata.count).toEqual(expectedResult.obj.response.numFound);
+    expect(searchResult.metadata.count).toEqual(expectedResult.response.numFound);
   }
 
-  pit('should process tally correctly', function() {
+  xit('should process tally correctly', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('tally');
-    
-    return searchPromise.then(function(searchResult) {
+
+    return searchPromise.then(function (searchResult) {
       checkResultCounts(searchResult);
 
       expect(searchResult.tally).toBeDefined();
-      expect(searchResult.tally.GO).toEqual(expectedResult.obj.facets.GO);
-      expect(searchResult.tally.PO).toEqual(expectedResult.obj.facets.PO);
-      expect(searchResult.tally.species).toEqual(expectedResult.obj.facets.species);
-      expect(searchResult.tally.domains).toEqual(expectedResult.obj.facets.domains);
-      expect(searchResult.tally.biotype).toEqual(expectedResult.obj.facets.biotype);
+      expect(searchResult.tally.GO).toEqual(expectedResult.facets.GO);
+      expect(searchResult.tally.PO).toEqual(expectedResult.facets.PO);
+      expect(searchResult.tally.species).toEqual(expectedResult.facets.species);
+      expect(searchResult.tally.domains).toEqual(expectedResult.facets.domains);
+      expect(searchResult.tally.biotype).toEqual(expectedResult.facets.biotype);
 
     });
   });
 
-  pit('should process facet correctly', function() {
+  pit('should process facet correctly', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('faceted');
 
-    return searchPromise.then(function(searchResult) {
+    return searchPromise.then(function (searchResult) {
       checkResultCounts(searchResult);
 
-      // this is an array of keys
-      var speciesFacetResults = searchResult.system_name.data;
-      expect(speciesFacetResults).toBeDefined();
+      // this is an object of results
+      var taxonFacetResults = searchResult.taxon_id;
+      expect(taxonFacetResults).toBeDefined();
 
       // this is an array of alternating keys and values as returned from SOLR
-      var unprocessedSystemNamesFromFixture = expectedResult.obj.facet_counts.facet_fields.system_name;
+      var unprocessedTaxonIdsFromFixture = _.chunk(expectedResult.facet_counts.facet_fields.taxon_id, 2);
+      var countTaxonIdsWithAtLeastOneResult = _.filter(unprocessedTaxonIdsFromFixture, function(i) {
+        return i[1] > 0;
+      }).length;
 
-      expect(searchResult.system_name.count).toEqual(unprocessedSystemNamesFromFixture.length / 2);
+      expect(_.size(taxonFacetResults.data)).toEqual(_.size(taxonFacetResults.sorted));
+      expect(_.size(taxonFacetResults.data)).toEqual(_.size(unprocessedTaxonIdsFromFixture));
+      expect(taxonFacetResults.count).toEqual(countTaxonIdsWithAtLeastOneResult);
 
-      _.forEach(Object.keys(speciesFacetResults), function(speciesName, idx) {
-        var count = speciesFacetResults[speciesName].count;
-        expect(speciesName).toEqual(unprocessedSystemNamesFromFixture[idx*2]);
-        expect(count).toEqual(unprocessedSystemNamesFromFixture[idx*2 + 1]);
-      });
+      for(var i = 0; i < taxonFacetResults.sorted.length; i++) {
+        var taxonFacet = taxonFacetResults.sorted[i];
+
+        expect(taxonFacet.id).toEqual(+unprocessedTaxonIdsFromFixture[i][0]);
+        expect(taxonFacet.count).toEqual(unprocessedTaxonIdsFromFixture[i][1]);
+      }
     });
   });
 
-  pit('should get result list', function() {
+  pit('should get result list', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('rows10');
 
-    return searchPromise.then(function(searchResult) {
+    return searchPromise.then(function (searchResult) {
       checkResultCounts(searchResult);
 
-      expect(searchResult.list.length).toEqual(10);
+      expect(searchResult.list.length).toEqual(5);
 
-      _.forEach(searchResult.list, function(doc, idx) {
-        var expectedDoc = expectedResult.obj.response.docs[idx];
+      _.forEach(searchResult.list, function (doc, idx) {
+        var expectedDoc = expectedResult.response.docs[idx];
         expect(doc).toEqual(expectedDoc);
       })
     });
   });
 
-  it('should allow test searches to be performed', function() {
-    return searchInterface._testSearch('binned').then(function(data) {
+  it('should allow test searches to be performed', function () {
+    return searchInterface._testSearch('binned').then(function (data) {
       expect(data).toBeDefined();
     })
   });
-  
+
 });

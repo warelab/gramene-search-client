@@ -3,7 +3,9 @@
 var _ = require('lodash');
 var Q = require('q');
 
-function makeSearchCall(grameneSwaggerClient) {
+var grameneSwaggerClient = require('./grameneSwaggerClient');
+
+function makeCall(grameneSwaggerClient, query) {
   var deferred = Q.defer();
   var params = getSolrParameters(query);
   params.collection = 'genes';
@@ -13,19 +15,21 @@ function makeSearchCall(grameneSwaggerClient) {
 
 function getSolrParameters(query) {
   var result = defaultSolrParameters();
-  if(!query) return result;
+  if (!query) return result;
 
   result.q = (query.q || '') + '*';
 
-  for(var rtName in query.resultTypes) {
+  for (var rtName in query.resultTypes) {
     _.assign(result, query.resultTypes[rtName], function (existing, another) {
       var result = existing;
 
       // handle the case where the same key may be defined in many result types, for example
       // facet.field. It's typical for solr to have multiple facet.field parameters in the URL,
-      // e.g. http://data.gramene.org/search/genes?wt=json&indent=true&q=*&rows=2&start=0&facet=true&facet.field=bin_10Mb&facet.field=bin_5Mb&facet.limit=10&facet.mincount=1&f.bin_10Mb.facet.limit=10&fq=Interpro_xrefs:(IPR008978 IPR002068)
-      if(existing) {
-        if(_.isArray(existing)) {
+      // e.g.
+      // http://data.gramene.org/search/genes?wt=json&indent=true&q=*&rows=2&start=0&facet=true&facet.field=bin_10Mb&facet.field=bin_5Mb&facet.limit=10&facet.mincount=1&f.bin_10Mb.facet.limit=10&fq=Interpro_xrefs:(IPR008978
+      // IPR002068)
+      if (existing) {
+        if (_.isArray(existing)) {
           existing.push(another);
           result = existing;
         }
@@ -41,7 +45,7 @@ function getSolrParameters(query) {
     });
   }
 
-  if(query.filters && Object.keys(query.filters).length) {
+  if (query.filters && Object.keys(query.filters).length) {
     result.fq = Object.keys(query.filters);
   }
 
@@ -57,22 +61,22 @@ function defaultSolrParameters() {
 }
 
 
-function reformatData(response) {
+function reformatResponse(response) {
   var data = response.obj;
   var fixed = {};
 
   if (data.facet_counts) {
     var originalFacets = data.facet_counts.facet_fields;
-    if(originalFacets && !data.results) {
+    if (originalFacets && !data.results) {
       fixed = data.results = {};
-      for(var f in originalFacets) {
+      for (var f in originalFacets) {
         fixed[f] = reformatFacet(originalFacets[f], isSearchFieldNumeric(f), f);
       }
       delete data.facet_counts;
     }
   }
 
-  if(data.response.docs.length) {
+  if (data.response.docs.length) {
     fixed.list = data.response.docs;
   }
   fixed.metadata = {
@@ -81,8 +85,8 @@ function reformatData(response) {
   };
 
   if (data.facets) {
-    fixed.tally={};
-    for(var f in data.facets) {
+    fixed.tally = {};
+    for (var f in data.facets) {
       fixed.tally[f] = data.facets[f];
     }
   }
@@ -116,19 +120,28 @@ function reformatFacet(facetData, numericIds, displayName) {
   //               }
   //      }
   var result = {data: {}, sorted: [], count: 0, displayName: displayName};
-  for (var i=0;i<facetData.length;i+=2) {
+  for (var i = 0; i < facetData.length; i += 2) {
     var id = numericIds ? parseInt(facetData[i]) : facetData[i]
-      , count = facetData[i+1]
-      , datum = { id: id, count: count };
+      , count = facetData[i + 1]
+      , datum = {id: id, count: count};
 
     result.data[id] = datum;
     result.sorted.push(datum);
-    if(count > 0) result.count++;
+    if (count > 0) result.count++;
   }
   return result;
 }
 
+function promise(query) {
+  return grameneSwaggerClient
+    .then(function (client) {
+      return makeCall(client, query)
+    })
+    .then(reformatResponse)
+}
+
 module.exports = {
-  makeCall: makeSearchCall,
-  reformatResponse: reformatData
+  makeCall: makeCall,
+  reformatResponse: reformatResponse,
+  promise: promise
 }

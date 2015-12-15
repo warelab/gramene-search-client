@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var Q = require('q');
 
-var grameneClientPromise = (function() {
+var grameneSwaggerClient = (function() {
   var Client = require('swagger-client');
   var deferred = Q.defer();
   var gramene = new Client({url: 'http://devdata.gramene.org/swagger', success: function() {
@@ -12,4 +12,4 @@ var grameneClientPromise = (function() {
   return deferred.promise;
 })();
 
-module.exports = grameneClientPromise;
+module.exports = grameneSwaggerClient;

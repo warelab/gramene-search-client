@@ -5,7 +5,7 @@ var Q = require('q');
 
 var grameneSwaggerClient = require('./grameneSwaggerClient');
 
-function makeCall(gramene) {
+function makeCall(gramene, queryString) {
   var deferred = Q.defer();
   var params = {q: queryString ? queryString + '*' : '*'};
   gramene['Search'].suggestions(params, deferred.resolve);
@@ -13,30 +13,52 @@ function makeCall(gramene) {
 }
 
 function reformatResponse(response) {
-  // the following line is a safer equivalent of
-  // `return response.obj.grouped.category.groups.map(function(category) {`
-  return _.get(response, 'obj.grouped.category.groups').map(function (category) {
-    var doclist = category.doclist;
-    if (!category.doclist) {
-      console.error('No doclist for category ', category);
-      return;
-    }
+  var query, category, categories;
+  query = _.get(response, 'obj.responseHeader.params.q');
 
-    return {
-      label: category.groupValue,
-      suggestions: doclist.docs,
-      maxScore: doclist.maxScore,
-      numFound: doclist.numFound
-    }
-  });
+  // remove the trailing '*'
+  if(query && query.length) {
+    query = query.slice(0, -1);
+  }
+
+  category = _.get(response, 'obj.grouped.category');
+  categories = _.get(response, 'obj.grouped.category.groups');
+
+  if(categories) {
+    // the following line is a safer equivalent of
+    // `return response.obj.grouped.category.groups.map(function(category) {`
+    categories = categories.map(function reformatSuggestionCategory(category) {
+      var doclist = category.doclist;
+      if (!category.doclist) {
+        console.error('No doclist for category ', category);
+        return;
+      }
+
+      return {
+        label: category.groupValue,
+        suggestions: doclist.docs,
+        max_score: doclist.maxScore,
+        num_found: doclist.numFound
+      }
+    });
+  }
+
+  return {
+    metadata: {
+      query: query,
+      count: category.matches,
+      url: response.url
+    },
+    categories: categories
+  }
 }
 
 function promise(queryString) {
   return grameneSwaggerClient
-    .then(function (query) {
-      return makeCall(query)
+    .then(function (client) {
+      return makeCall(client, queryString);
     })
-    .then(reformatResponse)
+    .then(reformatResponse);
 }
 
 

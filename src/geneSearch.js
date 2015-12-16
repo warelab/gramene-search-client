@@ -81,7 +81,8 @@ function reformatResponse(response) {
   }
   fixed.metadata = {
     count: data.response.numFound,
-    qtime: data.responseHeader.QTime
+    qtime: data.responseHeader.QTime,
+    url: response.url
   };
 
   if (data.facets) {

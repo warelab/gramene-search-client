@@ -1,0 +1,1456 @@
+{
+  "lyr": {
+    "query": "lyr",
+    "response": {
+      "obj": {
+        "responseHeader": {
+          "status": 0,
+          "QTime": 216,
+          "params": {
+            "q": "lyr*"
+          }
+        },
+        "grouped": {
+          "category": {
+            "matches": 7,
+            "groups": [
+              {
+                "groupValue": "InterPro",
+                "doclist": {
+                  "numFound": 2,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Family",
+                      "int_id": 26868,
+                      "id": "IPR026868",
+                      "display_name": "Lyrm2",
+                      "name": "Lyrm2",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "26868",
+                      "num_genes": 83,
+                      "relevance": 1.0,
+                      "_version_": 1518017738440704001,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Family",
+                      "int_id": 8011,
+                      "id": "IPR008011",
+                      "display_name": "Complex1_LYR",
+                      "name": "Complex1_LYR",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "8011",
+                      "num_genes": 374,
+                      "relevance": 0.57735026,
+                      "_version_": 1518017737928998913,
+                      "score": 0.36817867
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "Taxonomy",
+                "doclist": {
+                  "numFound": 2,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "subspecies",
+                      "int_id": 81972,
+                      "id": "NCBITaxon:81972",
+                      "display_name": "Arabidopsis lyrata subsp. lyrata",
+                      "name": "Arabidopsis lyrata subsp. lyrata",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "81972",
+                      "num_genes": 32667,
+                      "relevance": 1.0,
+                      "_version_": 1518017737420439572,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "species",
+                      "int_id": 59689,
+                      "id": "NCBITaxon:59689",
+                      "display_name": "Arabidopsis lyrata",
+                      "name": "Arabidopsis lyrata",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "59689",
+                      "num_genes": 32667,
+                      "relevance": 0.70710677,
+                      "_version_": 1518017737420439563,
+                      "score": 0.7270234
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "Gene",
+                "doclist": {
+                  "numFound": 3,
+                  "start": 0,
+                  "maxScore": 0.39223227,
+                  "docs": [
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "CHLREDRAFT_161525",
+                      "id": "_term_1651260",
+                      "display_name": "LYR1",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 3055,
+                      "_version_": 1520112978136924200,
+                      "score": 0.39223227
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "CHLREDRAFT_161525",
+                      "id": "_term_1651265",
+                      "display_name": "LYR1/EDP08926",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 3055,
+                      "_version_": 1520112978136924205,
+                      "score": 0.39223227
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "CHLREDRAFT_161525",
+                      "id": "_term_1651267",
+                      "display_name": "LYR1 1",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 3055,
+                      "_version_": 1520112978137972736,
+                      "score": 0.39223227
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "l": {
+    "query": "l",
+    "response": {
+      "obj": {
+        "responseHeader": {
+          "status": 0,
+          "QTime": 911,
+          "params": {
+            "q": "l*"
+          }
+        },
+        "grouped": {
+          "category": {
+            "matches": 176889,
+            "groups": [
+              {
+                "groupValue": "Gene",
+                "doclist": {
+                  "numFound": 169224,
+                  "start": 0,
+                  "maxScore": 0.9805807,
+                  "docs": [
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00010",
+                      "id": "LPERR01G00010",
+                      "display_name": "LPERR01G00010",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995477225497,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00020",
+                      "id": "LPERR01G00020",
+                      "display_name": "LPERR01G00020",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995477225501,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00030",
+                      "id": "LPERR01G00030",
+                      "display_name": "LPERR01G00030",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995477225505,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00040",
+                      "id": "LPERR01G00040",
+                      "display_name": "LPERR01G00040",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995477225509,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00050",
+                      "id": "LPERR01G00050",
+                      "display_name": "LPERR01G00050",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995477225513,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00060",
+                      "id": "LPERR01G00060",
+                      "display_name": "LPERR01G00060",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995477225517,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00070",
+                      "id": "LPERR01G00070",
+                      "display_name": "LPERR01G00070",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995478274049,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00080",
+                      "id": "LPERR01G00080",
+                      "display_name": "LPERR01G00080",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995478274053,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00090",
+                      "id": "LPERR01G00090",
+                      "display_name": "LPERR01G00090",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995478274057,
+                      "score": 0.9805807
+                    },
+                    {
+                      "category": "Gene",
+                      "fq_field": "id",
+                      "fq_value": "LPERR01G00100",
+                      "id": "LPERR01G00100",
+                      "display_name": "LPERR01G00100",
+                      "num_genes": 1,
+                      "relevance": 0.0,
+                      "taxon_id": 77586,
+                      "_version_": 1520112995478274061,
+                      "score": 0.9805807
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "InterPro",
+                "doclist": {
+                  "numFound": 3996,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Domain",
+                      "int_id": 32,
+                      "id": "IPR000032",
+                      "display_name": "HPr_prot-like",
+                      "name": "HPr_prot-like",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "32",
+                      "num_genes": 2,
+                      "relevance": 1.0,
+                      "_version_": 1518017737478111233,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Repeat",
+                      "int_id": 33,
+                      "id": "IPR000033",
+                      "display_name": "LDLR_classB_rpt",
+                      "name": "LDLR_classB_rpt",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "33",
+                      "num_genes": 22,
+                      "relevance": 1.0,
+                      "_version_": 1518017737478111234,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Family",
+                      "int_id": 178,
+                      "id": "IPR000178",
+                      "display_name": "TF_IF2_bacterial-like",
+                      "name": "TF_IF2_bacterial-like",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "178",
+                      "num_genes": 90,
+                      "relevance": 1.0,
+                      "_version_": 1518017737506422787,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Domain",
+                      "int_id": 196,
+                      "id": "IPR000196",
+                      "display_name": "Ribosomal_L19/L19e_dom",
+                      "name": "Ribosomal_L19/L19e_dom",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "196",
+                      "num_genes": 134,
+                      "relevance": 1.0,
+                      "_version_": 1518017737507471367,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Domain",
+                      "int_id": 310,
+                      "id": "IPR000310",
+                      "display_name": "Orn/Lys/Arg_deCO2ase_major_dom",
+                      "name": "Orn/Lys/Arg_deCO2ase_major_dom",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "310",
+                      "num_genes": 50,
+                      "relevance": 1.0,
+                      "_version_": 1518017737521102855,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Family",
+                      "int_id": 576,
+                      "id": "IPR000576",
+                      "display_name": "LacY/RafB_perm_fam",
+                      "name": "LacY/RafB_perm_fam",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "576",
+                      "num_genes": 1,
+                      "relevance": 1.0,
+                      "_version_": 1518017737561997314,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Domain",
+                      "int_id": 585,
+                      "id": "IPR000585",
+                      "display_name": "Hemopexin-like_dom",
+                      "name": "Hemopexin-like_dom",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "585",
+                      "num_genes": 31,
+                      "relevance": 1.0,
+                      "_version_": 1518017737561997319,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Domain",
+                      "int_id": 651,
+                      "id": "IPR000651",
+                      "display_name": "Ras-like_Gua-exchang_fac_N",
+                      "name": "Ras-like_Gua-exchang_fac_N",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "651",
+                      "num_genes": 3,
+                      "relevance": 1.0,
+                      "_version_": 1518017737569337350,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Family",
+                      "int_id": 709,
+                      "id": "IPR000709",
+                      "display_name": "Leu_Ile_Val-bd",
+                      "name": "Leu_Ile_Val-bd",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "709",
+                      "num_genes": 6,
+                      "relevance": 1.0,
+                      "_version_": 1518017737572483079,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "InterPro",
+                      "subcategory": "Domain",
+                      "int_id": 742,
+                      "id": "IPR000742",
+                      "display_name": "EGF-like_dom",
+                      "name": "EGF-like_dom",
+                      "fq_field": "domains__ancestors",
+                      "fq_value": "742",
+                      "num_genes": 2047,
+                      "relevance": 1.0,
+                      "_version_": 1518017737577725955,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "GO function",
+                "doclist": {
+                  "numFound": 1105,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "GO function",
+                      "int_id": 50048,
+                      "id": "GO:0050048",
+                      "display_name": "L-leucine:2-oxoglutarate aminotransferase activity",
+                      "name": "L-leucine:2-oxoglutarate aminotransferase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "50048",
+                      "num_genes": 10,
+                      "relevance": 1.0,
+                      "_version_": 1518017736167391233,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 34007,
+                      "id": "GO:0034007",
+                      "display_name": "S-linalool synthase activity",
+                      "name": "S-linalool synthase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "34007",
+                      "num_genes": 7,
+                      "relevance": 1.0,
+                      "_version_": 1518017736171585543,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 22841,
+                      "id": "GO:0022841",
+                      "display_name": "potassium ion leak channel activity",
+                      "name": "potassium ion leak channel activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "22841",
+                      "num_genes": 7,
+                      "relevance": 1.0,
+                      "_version_": 1518017736173682688,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 3939,
+                      "id": "GO:0003939",
+                      "display_name": "L-iditol 2-dehydrogenase activity",
+                      "name": "L-iditol 2-dehydrogenase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "3939",
+                      "num_genes": 22,
+                      "relevance": 1.0,
+                      "_version_": 1518017736182071302,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 4794,
+                      "id": "GO:0004794",
+                      "display_name": "L-threonine ammonia-lyase activity",
+                      "name": "L-threonine ammonia-lyase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "4794",
+                      "num_genes": 65,
+                      "relevance": 1.0,
+                      "_version_": 1518017736196751365,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 30272,
+                      "id": "GO:0030272",
+                      "display_name": "5-formyltetrahydrofolate cyclo-ligase activity",
+                      "name": "5-formyltetrahydrofolate cyclo-ligase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "30272",
+                      "num_genes": 67,
+                      "relevance": 1.0,
+                      "_version_": 1518017736198848512,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 4824,
+                      "id": "GO:0004824",
+                      "display_name": "lysine-tRNA ligase activity",
+                      "name": "lysine-tRNA ligase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "4824",
+                      "num_genes": 126,
+                      "relevance": 1.0,
+                      "_version_": 1518017736198848518,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 47372,
+                      "id": "GO:0047372",
+                      "display_name": "acylglycerol lipase activity",
+                      "name": "acylglycerol lipase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "47372",
+                      "num_genes": 5,
+                      "relevance": 1.0,
+                      "_version_": 1518017736208285701,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 32791,
+                      "id": "GO:0032791",
+                      "display_name": "lead ion binding",
+                      "name": "lead ion binding",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "32791",
+                      "num_genes": 10,
+                      "relevance": 1.0,
+                      "_version_": 1518017736215625733,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO function",
+                      "int_id": 80076,
+                      "id": "GO:0080076",
+                      "display_name": "caffeoyl CoA:S-adenosyl-L-methionine O-methyltransferase activity",
+                      "name": "caffeoyl CoA:S-adenosyl-L-methionine O-methyltransferase activity",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "80076",
+                      "num_genes": 4,
+                      "relevance": 1.0,
+                      "_version_": 1518017736230305800,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "GO process",
+                "doclist": {
+                  "numFound": 1699,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "GO process",
+                      "int_id": 10150,
+                      "id": "GO:0010150",
+                      "display_name": "leaf senescence",
+                      "name": "leaf senescence",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "10150",
+                      "num_genes": 645,
+                      "relevance": 1.0,
+                      "_version_": 1518017736173682693,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 97054,
+                      "id": "GO:0097054",
+                      "display_name": "L-glutamate biosynthetic process",
+                      "name": "L-glutamate biosynthetic process",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "97054",
+                      "num_genes": 2,
+                      "relevance": 1.0,
+                      "_version_": 1518017736177876995,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 10305,
+                      "id": "GO:0010305",
+                      "display_name": "leaf vascular tissue pattern formation",
+                      "name": "leaf vascular tissue pattern formation",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "10305",
+                      "num_genes": 412,
+                      "relevance": 1.0,
+                      "_version_": 1518017736199897088,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 44805,
+                      "id": "GO:0044805",
+                      "display_name": "late nucleophagy",
+                      "name": "late nucleophagy",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "44805",
+                      "num_genes": 2,
+                      "relevance": 1.0,
+                      "_version_": 1518017736200945666,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 34389,
+                      "id": "GO:0034389",
+                      "display_name": "lipid particle organization",
+                      "name": "lipid particle organization",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "34389",
+                      "num_genes": 24,
+                      "relevance": 1.0,
+                      "_version_": 1518017736210382858,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 33512,
+                      "id": "GO:0033512",
+                      "display_name": "L-lysine catabolic process to acetyl-CoA via saccharopine",
+                      "name": "L-lysine catabolic process to acetyl-CoA via saccharopine",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "33512",
+                      "num_genes": 2,
+                      "relevance": 1.0,
+                      "_version_": 1518017736229257216,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 48579,
+                      "id": "GO:0048579",
+                      "display_name": "negative regulation of long-day photoperiodism, flowering",
+                      "name": "negative regulation of long-day photoperiodism, flowering",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "48579",
+                      "num_genes": 62,
+                      "relevance": 1.0,
+                      "_version_": 1518017736231354374,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 19284,
+                      "id": "GO:0019284",
+                      "display_name": "L-methionine biosynthetic process from S-adenosylmethionine",
+                      "name": "L-methionine biosynthetic process from S-adenosylmethionine",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "19284",
+                      "num_genes": 51,
+                      "relevance": 1.0,
+                      "_version_": 1518017736244985859,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 34497,
+                      "id": "GO:0034497",
+                      "display_name": "protein localization to pre-autophagosomal structure",
+                      "name": "protein localization to pre-autophagosomal structure",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "34497",
+                      "num_genes": 13,
+                      "relevance": 1.0,
+                      "_version_": 1518017736255471616,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO process",
+                      "int_id": 472,
+                      "id": "GO:0000472",
+                      "display_name": "endonucleolytic cleavage to generate mature 5'-end of SSU-rRNA from (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",
+                      "name": "endonucleolytic cleavage to generate mature 5'-end of SSU-rRNA from (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "472",
+                      "num_genes": 1,
+                      "relevance": 1.0,
+                      "_version_": 1518017736271200261,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "GO component",
+                "doclist": {
+                  "numFound": 485,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "GO component",
+                      "int_id": 327,
+                      "id": "GO:0000327",
+                      "display_name": "lytic vacuole within protein storage vacuole",
+                      "name": "lytic vacuole within protein storage vacuole",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "327",
+                      "num_genes": 7,
+                      "relevance": 1.0,
+                      "_version_": 1518017736188362752,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 31462,
+                      "id": "GO:0031462",
+                      "display_name": "Cul2-RING ubiquitin ligase complex",
+                      "name": "Cul2-RING ubiquitin ligase complex",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "31462",
+                      "num_genes": 1,
+                      "relevance": 1.0,
+                      "_version_": 1518017736196751364,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 5762,
+                      "id": "GO:0005762",
+                      "display_name": "mitochondrial large ribosomal subunit",
+                      "name": "mitochondrial large ribosomal subunit",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "5762",
+                      "num_genes": 8,
+                      "relevance": 1.0,
+                      "_version_": 1518017736216674307,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 16328,
+                      "id": "GO:0016328",
+                      "display_name": "lateral plasma membrane",
+                      "name": "lateral plasma membrane",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "16328",
+                      "num_genes": 41,
+                      "relevance": 1.0,
+                      "_version_": 1518017736276443148,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 43224,
+                      "id": "GO:0043224",
+                      "display_name": "nuclear SCF ubiquitin ligase complex",
+                      "name": "nuclear SCF ubiquitin ligase complex",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "43224",
+                      "num_genes": 5,
+                      "relevance": 1.0,
+                      "_version_": 1518017736316289035,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 32807,
+                      "id": "GO:0032807",
+                      "display_name": "DNA ligase IV complex",
+                      "name": "DNA ligase IV complex",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "32807",
+                      "num_genes": 3,
+                      "relevance": 1.0,
+                      "_version_": 1518017736349843458,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 5958,
+                      "id": "GO:0005958",
+                      "display_name": "DNA-dependent protein kinase-DNA ligase 4 complex",
+                      "name": "DNA-dependent protein kinase-DNA ligase 4 complex",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "5958",
+                      "num_genes": 8,
+                      "relevance": 1.0,
+                      "_version_": 1518017736366620675,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 72669,
+                      "id": "GO:0072669",
+                      "display_name": "tRNA-splicing ligase complex",
+                      "name": "tRNA-splicing ligase complex",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "72669",
+                      "num_genes": 3,
+                      "relevance": 1.0,
+                      "_version_": 1518017736366620686,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 9346,
+                      "id": "GO:0009346",
+                      "display_name": "citrate lyase complex",
+                      "name": "citrate lyase complex",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "9346",
+                      "num_genes": 25,
+                      "relevance": 1.0,
+                      "_version_": 1518017736444215300,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "GO component",
+                      "int_id": 9543,
+                      "id": "GO:0009543",
+                      "display_name": "chloroplast thylakoid lumen",
+                      "name": "chloroplast thylakoid lumen",
+                      "fq_field": "GO__ancestors",
+                      "fq_value": "9543",
+                      "num_genes": 605,
+                      "relevance": 1.0,
+                      "_version_": 1518017736647639045,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "Plant anatomy",
+                "doclist": {
+                  "numFound": 235,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 4726,
+                      "id": "PO:0004726",
+                      "display_name": "adaxial side of leaf primordium",
+                      "name": "adaxial side of leaf primordium",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "4726",
+                      "num_genes": 4,
+                      "relevance": 1.0,
+                      "_version_": 1518017737280978946,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 9023,
+                      "id": "PO:0009023",
+                      "display_name": "leaf axil",
+                      "name": "leaf axil",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "9023",
+                      "num_genes": 2,
+                      "relevance": 1.0,
+                      "_version_": 1518017737291464710,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 61,
+                      "id": "PO:0000061",
+                      "display_name": "lateral root-cap epidermal initial cell",
+                      "name": "lateral root-cap epidermal initial cell",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "61",
+                      "num_genes": 1,
+                      "relevance": 1.0,
+                      "_version_": 1518017737291464713,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 3022,
+                      "id": "PO:0003022",
+                      "display_name": "lateral root cap of primary root",
+                      "name": "lateral root cap of primary root",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "3022",
+                      "num_genes": 7,
+                      "relevance": 1.0,
+                      "_version_": 1518017737294610433,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 6034,
+                      "id": "PO:0006034",
+                      "display_name": "leaflet margin",
+                      "name": "leaflet margin",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "6034",
+                      "num_genes": 1,
+                      "relevance": 1.0,
+                      "_version_": 1518017737305096192,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 25022,
+                      "id": "PO:0025022",
+                      "display_name": "collective leaf structure",
+                      "name": "collective leaf structure",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "25022",
+                      "num_genes": 15587,
+                      "relevance": 1.0,
+                      "_version_": 1518017737310339083,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 25237,
+                      "id": "PO:0025237",
+                      "display_name": "leaf guard cell",
+                      "name": "leaf guard cell",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "25237",
+                      "num_genes": 2,
+                      "relevance": 1.0,
+                      "_version_": 1518017737311387661,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 6501,
+                      "id": "PO:0006501",
+                      "display_name": "leaf abscission zone",
+                      "name": "leaf abscission zone",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "6501",
+                      "num_genes": 10,
+                      "relevance": 1.0,
+                      "_version_": 1518017737319776260,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 6339,
+                      "id": "PO:0006339",
+                      "display_name": "juvenile vascular leaf",
+                      "name": "juvenile vascular leaf",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "6339",
+                      "num_genes": 191,
+                      "relevance": 1.0,
+                      "_version_": 1518017737320824838,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant anatomy",
+                      "int_id": 14,
+                      "id": "PO:0000014",
+                      "display_name": "rosette leaf",
+                      "name": "rosette leaf",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "14",
+                      "num_genes": 355,
+                      "relevance": 1.0,
+                      "_version_": 1518017737325019136,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "Plant structural/developmental stage",
+                "doclist": {
+                  "numFound": 44,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 7095,
+                      "id": "PO:0007095",
+                      "display_name": "LP.08 eight leaves visible stage",
+                      "name": "LP.08 eight leaves visible stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "7095",
+                      "num_genes": 12031,
+                      "relevance": 1.0,
+                      "_version_": 1518017737290416136,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 7103,
+                      "id": "PO:0007103",
+                      "display_name": "LP.10 ten leaves visible stage",
+                      "name": "LP.10 ten leaves visible stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "7103",
+                      "num_genes": 12500,
+                      "relevance": 1.0,
+                      "_version_": 1518017737291464705,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 1016,
+                      "id": "PO:0001016",
+                      "display_name": "L mature pollen stage",
+                      "name": "L mature pollen stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "1016",
+                      "num_genes": 3872,
+                      "relevance": 1.0,
+                      "_version_": 1518017737293561856,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 7123,
+                      "id": "PO:0007123",
+                      "display_name": "LP.06 six leaves visible stage",
+                      "name": "LP.06 six leaves visible stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "7123",
+                      "num_genes": 12402,
+                      "relevance": 1.0,
+                      "_version_": 1518017737294610444,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 1054,
+                      "id": "PO:0001054",
+                      "display_name": "4 leaf senescence stage",
+                      "name": "4 leaf senescence stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "1054",
+                      "num_genes": 12742,
+                      "relevance": 1.0,
+                      "_version_": 1518017737310339080,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 7064,
+                      "id": "PO:0007064",
+                      "display_name": "LP.12 twelve leaves visible stage",
+                      "name": "LP.12 twelve leaves visible stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "7064",
+                      "num_genes": 12019,
+                      "relevance": 1.0,
+                      "_version_": 1518017737311387662,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 7098,
+                      "id": "PO:0007098",
+                      "display_name": "LP.02 two leaves visible stage",
+                      "name": "LP.02 two leaves visible stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "7098",
+                      "num_genes": 12180,
+                      "relevance": 1.0,
+                      "_version_": 1518017737319776256,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 1013,
+                      "id": "PO:0001013",
+                      "display_name": "H late unicellular microspore stage",
+                      "name": "H late unicellular microspore stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "1013",
+                      "num_genes": 1,
+                      "relevance": 1.0,
+                      "_version_": 1518017737320824840,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 1053,
+                      "id": "PO:0001053",
+                      "display_name": "3 leaf fully expanded stage",
+                      "name": "3 leaf fully expanded stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "1053",
+                      "num_genes": 7,
+                      "relevance": 1.0,
+                      "_version_": 1518017737325019140,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant structural/developmental stage",
+                      "int_id": 1026,
+                      "id": "PO:0001026",
+                      "display_name": "D locules established stage",
+                      "name": "D locules established stage",
+                      "fq_field": "PO__ancestors",
+                      "fq_value": "1026",
+                      "num_genes": 4,
+                      "relevance": 1.0,
+                      "_version_": 1518017737326067722,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "Plant Reactome",
+                "doclist": {
+                  "numFound": 84,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119658,
+                      "id": "1119658",
+                      "display_name": "O2+linolenate->13-HPOT",
+                      "name": "O2+linolenate->13-HPOT",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119658",
+                      "num_genes": 85,
+                      "relevance": 1.0,
+                      "_version_": 1518017738930389004,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119777,
+                      "id": "1119777",
+                      "display_name": "indole-3-acetyl-ala+H2O->indole-3-acetate+L-alanine",
+                      "name": "indole-3-acetyl-ala+H2O->indole-3-acetate+L-alanine",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119777",
+                      "num_genes": 92,
+                      "relevance": 1.0,
+                      "_version_": 1518017738931437584,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119800,
+                      "id": "1119800",
+                      "display_name": "delta-tocopherol+S-adenosyl-L-methionine->beta-tocopherol+S-adenosyl-L-homocysteine",
+                      "name": "delta-tocopherol+S-adenosyl-L-methionine->beta-tocopherol+S-adenosyl-L-homocysteine",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119800",
+                      "num_genes": 32,
+                      "relevance": 1.0,
+                      "_version_": 1518017738932486148,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119807,
+                      "id": "1119807",
+                      "display_name": "Leucocyanidin oxygenase",
+                      "name": "Leucocyanidin oxygenase",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119807",
+                      "num_genes": 33,
+                      "relevance": 1.0,
+                      "_version_": 1518017738932486151,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119838,
+                      "id": "1119838",
+                      "display_name": "a folylpolyglutamate(n)+L-glutamate+ATP->a folylpolyglutamate(n+1)+phosphate+ADP",
+                      "name": "a folylpolyglutamate(n)+L-glutamate+ATP->a folylpolyglutamate(n+1)+phosphate+ADP",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119838",
+                      "num_genes": 54,
+                      "relevance": 1.0,
+                      "_version_": 1518017738932486157,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119903,
+                      "id": "1119903",
+                      "display_name": "L-threonine 3-dehydrogenase",
+                      "name": "L-threonine 3-dehydrogenase",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119903",
+                      "num_genes": 142,
+                      "relevance": 1.0,
+                      "_version_": 1518017738935631876,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1119980,
+                      "id": "1119980",
+                      "display_name": "leucopelargonidin+alpha-ketoglutarate+O2->pelargonidin+succinate+CO2+H2O",
+                      "name": "leucopelargonidin+alpha-ketoglutarate+O2->pelargonidin+succinate+CO2+H2O",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1119980",
+                      "num_genes": 33,
+                      "relevance": 1.0,
+                      "_version_": 1518017738936680450,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1120140,
+                      "id": "1120140",
+                      "display_name": "pantoyl lactone+beta-alanine->pantothenate",
+                      "name": "pantoyl lactone+beta-alanine->pantothenate",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1120140",
+                      "num_genes": 21,
+                      "relevance": 1.0,
+                      "_version_": 1518017738937729034,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1120176,
+                      "id": "1120176",
+                      "display_name": "2'-hydroxygenistein+dimethylallyl-PP->luteone+diphosphate",
+                      "name": "2'-hydroxygenistein+dimethylallyl-PP->luteone+diphosphate",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1120176",
+                      "num_genes": 39,
+                      "relevance": 1.0,
+                      "_version_": 1518017738941923328,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Plant Reactome",
+                      "int_id": 1120232,
+                      "id": "1120232",
+                      "display_name": "Formate--tetrahydrofolate ligase",
+                      "name": "Formate--tetrahydrofolate ligase",
+                      "fq_field": "pathways__ancestors",
+                      "fq_value": "1120232",
+                      "num_genes": 33,
+                      "relevance": 1.0,
+                      "_version_": 1518017738942971913,
+                      "score": 0.78446454
+                    }
+                  ]
+                }
+              },
+              {
+                "groupValue": "Taxonomy",
+                "doclist": {
+                  "numFound": 17,
+                  "start": 0,
+                  "maxScore": 0.78446454,
+                  "docs": [
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "species",
+                      "int_id": 4081,
+                      "id": "NCBITaxon:4081",
+                      "display_name": "Solanum lycopersicum",
+                      "name": "Solanum lycopersicum",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "4081",
+                      "num_genes": 38735,
+                      "relevance": 1.0,
+                      "_version_": 1518017737412050952,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "species",
+                      "int_id": 4528,
+                      "id": "NCBITaxon:4528",
+                      "display_name": "Oryza longistaminata",
+                      "name": "Oryza longistaminata",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "4528",
+                      "num_genes": 29974,
+                      "relevance": 1.0,
+                      "_version_": 1518017737412050961,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "species",
+                      "int_id": 77586,
+                      "id": "NCBITaxon:77586",
+                      "display_name": "Leersia perrieri",
+                      "name": "Leersia perrieri",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "77586",
+                      "num_genes": 30615,
+                      "relevance": 1.0,
+                      "_version_": 1518017737420439570,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "subspecies",
+                      "int_id": 81972,
+                      "id": "NCBITaxon:81972",
+                      "display_name": "Arabidopsis lyrata subsp. lyrata",
+                      "name": "Arabidopsis lyrata subsp. lyrata",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "81972",
+                      "num_genes": 32667,
+                      "relevance": 1.0,
+                      "_version_": 1518017737420439572,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "",
+                      "int_id": 436017,
+                      "id": "NCBITaxon:436017",
+                      "display_name": "Ostreococcus lucimarinus CCE9901",
+                      "name": "Ostreococcus lucimarinus CCE9901",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "436017",
+                      "num_genes": 7640,
+                      "relevance": 1.0,
+                      "_version_": 1518017737422536714,
+                      "score": 0.78446454
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "genus",
+                      "int_id": 35711,
+                      "id": "NCBITaxon:35711",
+                      "display_name": "Leersia",
+                      "name": "Leersia",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "35711",
+                      "num_genes": 30615,
+                      "relevance": 0.70710677,
+                      "_version_": 1518017737414148124,
+                      "score": 0.7270234
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "subgenus",
+                      "int_id": 49274,
+                      "id": "NCBITaxon:49274",
+                      "display_name": "Lycopersicon",
+                      "name": "Lycopersicon",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "49274",
+                      "num_genes": 38735,
+                      "relevance": 0.70710677,
+                      "_version_": 1518017737420439559,
+                      "score": 0.7270234
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "species",
+                      "int_id": 59689,
+                      "id": "NCBITaxon:59689",
+                      "display_name": "Arabidopsis lyrata",
+                      "name": "Arabidopsis lyrata",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "59689",
+                      "num_genes": 32667,
+                      "relevance": 0.70710677,
+                      "_version_": 1518017737420439563,
+                      "score": 0.7270234
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "species",
+                      "int_id": 242159,
+                      "id": "NCBITaxon:242159",
+                      "display_name": "Ostreococcus 'lucimarinus'",
+                      "name": "Ostreococcus 'lucimarinus'",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "242159",
+                      "num_genes": 7640,
+                      "relevance": 0.70710677,
+                      "_version_": 1518017737422536704,
+                      "score": 0.7270234
+                    },
+                    {
+                      "category": "Taxonomy",
+                      "subcategory": "subclass",
+                      "int_id": 1521260,
+                      "id": "NCBITaxon:1521260",
+                      "display_name": "Lycopodiidae",
+                      "name": "Lycopodiidae",
+                      "fq_field": "taxonomy__ancestors",
+                      "fq_value": "1521260",
+                      "num_genes": 34888,
+                      "relevance": 0.4472136,
+                      "_version_": 1518017737422536724,
+                      "score": 0.6760542
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "xxy": {
+    "query": "xxy",
+    "response": {
+      "obj": {
+        "responseHeader": {
+          "status": 0,
+          "QTime": 4,
+          "params": {
+            "q": "xxy*"
+          }
+        },
+        "grouped": {
+          "category": {
+            "matches": 0,
+            "groups": []
+          }
+        }
+      }
+    }
+  }
+}

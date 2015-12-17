@@ -5,6 +5,8 @@ var suggestFixtures = require('../support/suggest48.json');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 
+var setExpectedResultAndGetSearchPromise = require('../support/testSwaggerClientPromiseFactory')('suggest', suggestFixtures);
+
 jasminePit.install(global);
 require('jasmine-expect');
 
@@ -14,19 +16,19 @@ describe('suggest', function () {
   var searchInterface = require('../../src/searchInterface')
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
 
-  var expectedResult;
+  //var expectedResult;
+  //
+  //function setExpectedResultAndGetSearchPromise(name) {
+  //  var fixture = suggestFixtures[name];
+  //  expectedResult = fixture.response.obj;
+  //
+  //  // comment out this line to test with real server
+  //  //spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
+  //
+  //  return searchInterface.suggest(fixture.query);
+  //}
 
-  function setExpectedResultAndGetSearchPromise(name) {
-    var fixture = suggestFixtures[name];
-    expectedResult = fixture.response.obj;
-
-    // comment out this line to test with real server
-    //spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
-
-    return searchInterface.suggest(fixture.query);
-  }
-
-  function checkResultCounts(searchResult) {
+  function checkResultCount(searchResult, expectedResult) {
     expect(searchResult).toBeDefined();
     expect(searchResult.metadata).toBeDefined();
     expect(searchResult.metadata.count).toEqual(expectedResult.grouped.category.matches);
@@ -37,7 +39,7 @@ describe('suggest', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise(term);
 
     return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult);
+      checkResultCount(searchResult, searchPromise.unprocessedResponse);
 
       expect(searchResult.metadata.count).toEqual(7);
       expect(searchResult.metadata.query).toEqual(term);
@@ -60,7 +62,7 @@ describe('suggest', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise(term);
 
     return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult);
+      checkResultCount(searchResult, searchPromise.unprocessedResponse);
 
       expect(searchResult.metadata.count).toEqual(176889);
       expect(searchResult.metadata.query).toEqual(term);
@@ -83,7 +85,7 @@ describe('suggest', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise(term);
 
     return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult);
+      checkResultCount(searchResult, searchPromise.unprocessedResponse);
 
       expect(searchResult.metadata.count).toEqual(0);
       expect(searchResult.metadata.query).toEqual(term);

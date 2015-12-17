@@ -3,6 +3,8 @@ var resultFixtures = require('../support/searchResult48');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 
+var setExpectedResultAndGetSearchPromise = require('../support/testSwaggerClientPromiseFactory')('geneSearch', resultFixtures);
+
 jasminePit.install(global);
 require('jasmine-expect');
 
@@ -12,36 +14,37 @@ describe('geneSearch', function () {
   var searchInterface = require('../../src/searchInterface')
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
 
-  var expectedResult;
+  //var expectedResult;
+  //
+  //function setExpectedResultAndGetSearchPromise(name) {
+  //  var fixture = resultFixtures[name];
+  //  expectedResult = fixture.response.obj;
+  //
+  //  // comment out this line to test with real server
+  //  spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
+  //
+  //  return searchInterface.geneSearch(fixture.query);
+  //}
 
-  function setExpectedResultAndGetSearchPromise(name) {
-    var fixture = resultFixtures[name];
-    expectedResult = fixture.response.obj;
-
-    // comment out this line to test with real server
-    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
-
-    return searchInterface.geneSearch(fixture.query);
-  }
-
-  function checkResultCounts(searchResult) {
+  function checkResultCounts(searchResult, expectedResult) {
     expect(searchResult).toBeDefined();
     expect(searchResult.metadata).toBeDefined();
     expect(searchResult.metadata.count).toEqual(expectedResult.response.numFound);
   }
 
+  // not currently using / supporting this functionality.
   xit('should process tally correctly', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('tally');
 
     return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult);
+      checkResultCounts(searchResult, searchPromise.unprocessedResponse);
 
       expect(searchResult.tally).toBeDefined();
-      expect(searchResult.tally.GO).toEqual(expectedResult.facets.GO);
-      expect(searchResult.tally.PO).toEqual(expectedResult.facets.PO);
-      expect(searchResult.tally.species).toEqual(expectedResult.facets.species);
-      expect(searchResult.tally.domains).toEqual(expectedResult.facets.domains);
-      expect(searchResult.tally.biotype).toEqual(expectedResult.facets.biotype);
+      expect(searchResult.tally.GO).toEqual(searchPromise.unprocessedResponse.facets.GO);
+      expect(searchResult.tally.PO).toEqual(searchPromise.unprocessedResponse.facets.PO);
+      expect(searchResult.tally.species).toEqual(searchPromise.unprocessedResponse.facets.species);
+      expect(searchResult.tally.domains).toEqual(searchPromise.unprocessedResponse.facets.domains);
+      expect(searchResult.tally.biotype).toEqual(searchPromise.unprocessedResponse.facets.biotype);
 
     });
   });
@@ -50,14 +53,14 @@ describe('geneSearch', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('faceted');
 
     return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult);
+      checkResultCounts(searchResult, searchPromise.unprocessedResponse);
 
       // this is an object of results
       var taxonFacetResults = searchResult.taxon_id;
       expect(taxonFacetResults).toBeDefined();
 
       // this is an array of alternating keys and values as returned from SOLR
-      var unprocessedTaxonIdsFromFixture = _.chunk(expectedResult.facet_counts.facet_fields.taxon_id, 2);
+      var unprocessedTaxonIdsFromFixture = _.chunk(searchPromise.unprocessedResponse.facet_counts.facet_fields.taxon_id, 2);
       var countTaxonIdsWithAtLeastOneResult = _.filter(unprocessedTaxonIdsFromFixture, function(i) {
         return i[1] > 0;
       }).length;
@@ -79,12 +82,12 @@ describe('geneSearch', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('rows10');
 
     return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult);
+      checkResultCounts(searchResult, searchPromise.unprocessedResponse);
 
       expect(searchResult.list.length).toEqual(5);
 
       _.forEach(searchResult.list, function (doc, idx) {
-        var expectedDoc = expectedResult.response.docs[idx];
+        var expectedDoc = searchPromise.unprocessedResponse.response.docs[idx];
         expect(doc).toEqual(expectedDoc);
       })
     });

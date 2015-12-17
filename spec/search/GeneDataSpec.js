@@ -8,29 +8,17 @@ var _ = require('lodash');
 jasminePit.install(global);
 require('jasmine-expect');
 
-describe('geneData', function () {var searchInterface = require('../../src/searchInterface')
+var setExpectedResultAndGetSearchPromise = require('../support/testSwaggerClientPromiseFactory')('genes', geneFixtures);
+
+describe('geneData', function () {
+  var searchInterface = require('../../src/searchInterface');
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
-
-  var expectedResult;
-
-  function setExpectedResultAndGetSearchPromise(name) {
-    var fixture = geneFixtures[name];
-    expectedResult = fixture.response.obj;
-
-    // comment out this line to test with real server
-    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
-
-    return searchInterface.genes(fixture.query);
-  }
 
   it('should have a method "searchInterface.genes" that returns a promise', function() {
     expect(searchInterface.genes).toBeDefined();
     expect(_.isFunction(searchInterface.genes)).toEqual(true);
 
-    expect(searchInterface.genes('AT3G52430').then).toBeDefined();
-    //
-    //expect(function() { searchInterface.genes('AT3G52430')} ).not.toThrowAnyError();
-    //expect(function() { searchInterface.genes(['AT3G52430', "PRUPE_ppa025554mg"])} ).not.toThrowAnyError();
+    expect(_.isFunction(searchInterface.genes('AT3G52430').then)).toEqual(true);
   });
 
   pit('should fail when provided `undefined` as query', function() {

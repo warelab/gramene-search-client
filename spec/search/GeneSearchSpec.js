@@ -88,7 +88,7 @@ describe('geneSearch', function () {
 
       _.forEach(searchResult.list, function (doc, idx) {
         var expectedDoc = searchPromise.unprocessedResponse.response.docs[idx];
-        expect(doc).toEqual(expectedDoc);
+        expect(doc.id).toEqual(expectedDoc.id);
       })
     });
   });

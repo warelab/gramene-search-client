@@ -13,7 +13,7 @@ require('jasmine-expect');
 
 describe('suggest', function () {
 
-  var searchInterface = require('../../src/searchInterface')
+  var searchInterface = require('../../src/searchInterface');
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
 
   //var expectedResult;

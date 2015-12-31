@@ -30,7 +30,7 @@
                       "name": "Lyrm2",
                       "fq_field": "domains__ancestors",
                       "fq_value": "26868",
-                      "num_genes": 83,
+                      "num_genes": 84,
                       "relevance": 1.0,
                       "_version_": 1518017738440704001,
                       "score": 0.78446454
@@ -155,7 +155,7 @@
         },
         "grouped": {
           "category": {
-            "matches": 176889,
+            "matches": 176982,
             "groups": [
               {
                 "groupValue": "Gene",

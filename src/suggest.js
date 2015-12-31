@@ -4,11 +4,17 @@ var _ = require('lodash');
 var Q = require('q');
 
 var grameneSwaggerClient = require('./grameneSwaggerClient');
+var validate = require('./validate');
 
 function makeCall(gramene, queryString) {
   var deferred = Q.defer();
   var params = {q: queryString ? queryString + '*' : '*'};
-  gramene['Search'].suggestions(params, deferred.resolve);
+
+  gramene['Search'].suggestions(params, function(res) {
+    res.client = gramene;
+    deferred.resolve(res);
+  });
+
   return deferred.promise;
 }
 
@@ -58,6 +64,7 @@ function promise(queryString) {
     .then(function (client) {
       return makeCall(client, queryString);
     })
+    .then(validate("SolrSuggestResponse"))
     .then(reformatResponse);
 }
 
@@ -66,4 +73,4 @@ module.exports = {
   makeCall: makeCall,
   reformatResponse: reformatResponse,
   promise: promise
-}
+};

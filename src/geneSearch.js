@@ -6,12 +6,12 @@ var Q = require('q');
 var grameneSwaggerClient = require('./grameneSwaggerClient');
 var validate = require('./validate');
 
-function makeCall(grameneSwaggerClient, query) {
+function makeCall(gramene, query) {
   var deferred = Q.defer();
   var params = getSolrParameters(query);
   params.collection = 'genes';
-  grameneSwaggerClient['Search'].genes(params, function(res) {
-    res.client = grameneSwaggerClient;
+  gramene['Search'].genes(params, function(res) {
+    res.client = gramene;
     deferred.resolve(res);
   });
   return deferred.promise;
@@ -147,7 +147,7 @@ function promise(query) {
     .then(function (client) {
       return makeCall(client, query);
     })
-    .then(validate)
+    .then(validate("SolrGeneResponse"))
     .then(reformatResponse)
 }
 

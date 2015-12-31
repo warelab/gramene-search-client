@@ -3,16 +3,21 @@
 var _ = require('lodash');
 var Q = require('q');
 
+var validate = require('./validate');
 var grameneSwaggerClient = require('./grameneSwaggerClient');
 
-function makeCall(grameneSwaggerClient, query) {
+function makeCall(gramene, query) {
   var deferred = Q.defer();
   var ids = getIdListString(query);
   var params = {
-    collection: 'genes',
     idList: ids
-  }
-  grameneSwaggerClient['Data access'].get(params, deferred.resolve);
+  };
+
+  gramene['Data access'].genes(params, function(res) {
+    res.client = gramene;
+    deferred.resolve(res);
+  });
+
   return deferred.promise;
 }
 
@@ -44,6 +49,7 @@ function promise(queryString) {
     .then(function (client) {
       return makeCall(client, queryString);
     })
+    .then(validate("MongoGeneResponse"))
     .then(reformatResponse);
 }
 

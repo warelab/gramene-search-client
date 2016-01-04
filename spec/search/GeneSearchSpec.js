@@ -11,43 +11,14 @@ require('jasmine-expect');
 
 describe('geneSearch', function () {
 
-  var searchInterface = require('../../src/searchInterface')
+  var searchInterface = require('../../src/searchInterface');
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
-
-  //var expectedResult;
-  //
-  //function setExpectedResultAndGetSearchPromise(name) {
-  //  var fixture = resultFixtures[name];
-  //  expectedResult = fixture.response.obj;
-  //
-  //  // comment out this line to test with real server
-  //  spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
-  //
-  //  return searchInterface.geneSearch(fixture.query);
-  //}
 
   function checkResultCounts(searchResult, expectedResult) {
     expect(searchResult).toBeDefined();
     expect(searchResult.metadata).toBeDefined();
     expect(searchResult.metadata.count).toEqual(expectedResult.response.numFound);
   }
-
-  // not currently using / supporting this functionality.
-  xit('should process tally correctly', function () {
-    var searchPromise = setExpectedResultAndGetSearchPromise('tally');
-
-    return searchPromise.then(function (searchResult) {
-      checkResultCounts(searchResult, searchPromise.unprocessedResponse);
-
-      expect(searchResult.tally).toBeDefined();
-      expect(searchResult.tally.GO).toEqual(searchPromise.unprocessedResponse.facets.GO);
-      expect(searchResult.tally.PO).toEqual(searchPromise.unprocessedResponse.facets.PO);
-      expect(searchResult.tally.species).toEqual(searchPromise.unprocessedResponse.facets.species);
-      expect(searchResult.tally.domains).toEqual(searchPromise.unprocessedResponse.facets.domains);
-      expect(searchResult.tally.biotype).toEqual(searchPromise.unprocessedResponse.facets.biotype);
-
-    });
-  });
 
   pit('should process facet correctly', function () {
     var searchPromise = setExpectedResultAndGetSearchPromise('faceted');

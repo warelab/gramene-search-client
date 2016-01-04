@@ -29,11 +29,11 @@ function setExpectedResultAndGetSearchPromise(searchMethod, fixtures, name) {
   promise = searchInterface[searchMethod](fixture.query);
 
   // decorate promise with parsed but unprocessed response.
-  promise.unprocessedResponse = fixture.response.obj
+  promise.unprocessedResponse = fixture.response.obj;
 
   return promise;
 }
 
 module.exports = function factory(searchMethod, fixtures) {
   return _.partial(setExpectedResultAndGetSearchPromise, searchMethod, fixtures);
-}
+};

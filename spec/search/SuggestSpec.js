@@ -13,7 +13,7 @@ require('jasmine-expect');
 
 describe('suggest', function () {
 
-  var searchInterface = require('../../src/searchInterface')
+  var searchInterface = require('../../src/searchInterface');
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
 
   //var expectedResult;
@@ -53,7 +53,7 @@ describe('suggest', function () {
 
       var topSug = topCat.suggestions[0];
       expect(topSug.category).toEqual('InterPro');
-      expect(topSug.num_genes).toEqual(83);
+      expect(topSug.num_genes).toEqual(84);
     });
   });
 
@@ -64,7 +64,7 @@ describe('suggest', function () {
     return searchPromise.then(function (searchResult) {
       checkResultCount(searchResult, searchPromise.unprocessedResponse);
 
-      expect(searchResult.metadata.count).toEqual(176889);
+      expect(searchResult.metadata.count).toEqual(176982);
       expect(searchResult.metadata.query).toEqual(term);
 
       expect(searchResult.categories).toBeDefined();

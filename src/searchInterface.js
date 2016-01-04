@@ -5,7 +5,7 @@ var Q = require('q');
 
 var geneSearch = require('./geneSearch');
 var suggest = require('./suggest');
-var genes = require('./genes')
+var genes = require('./genes');
 
 function testSearch(example) {
   return Q(_.cloneDeep(require('../spec/support/searchResult48')[example]))

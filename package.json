@@ -4,16 +4,16 @@
   "description": "Javascript client for searching Gramene's API",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/jasmine-node/lib/jasmine-node/cli.js spec"
+    "test": "node node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
     "url": "git@github:warelab/gramene-search-client.git"
   },
   "devDependencies": {
-    "jasmine-expect": "^2.0.0-beta1",
-    "jasmine-node": "^1.14.5",
-    "jasmine-pit": "^2.0.2"
+    "jasmine": "^2.4.1",
+    "jasmine-expect": "^2.0.0-beta2",
+    "jasmine-pit": "git://github.com/mycrobe/jasmine-pit#jasmine_2_support"
   },
   "dependencies": {
     "lodash": "^3.6.0",

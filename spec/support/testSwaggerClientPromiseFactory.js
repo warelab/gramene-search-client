@@ -23,7 +23,7 @@ function setExpectedResultAndGetSearchPromise(searchMethod, fixtures, name) {
   // or to call the REAL LIVE REMOTE SERVER.
 
   if(!useLiveServer) {
-    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
+    spyOn(grameneSwaggerClient, 'then').and.returnValue(Q(_.cloneDeep(fixture.response)));
   }
 
   promise = searchInterface[searchMethod](fixture.query);

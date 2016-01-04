@@ -4,12 +4,16 @@ var _ = require('lodash');
 var Q = require('q');
 
 var grameneSwaggerClient = require('./grameneSwaggerClient');
+var validate = require('./validate');
 
-function makeCall(grameneSwaggerClient, query) {
+function makeCall(gramene, query) {
   var deferred = Q.defer();
   var params = getSolrParameters(query);
   params.collection = 'genes';
-  grameneSwaggerClient['Search'].genes(params, deferred.resolve);
+  gramene['Search'].genes(params, function(res) {
+    res.client = gramene;
+    deferred.resolve(res);
+  });
   return deferred.promise;
 }
 
@@ -47,6 +51,7 @@ function getSolrParameters(query) {
 
   if (query.filters && Object.keys(query.filters).length) {
     result.fq = Object.keys(query.filters);
+    result.facet = true;
   }
 
   return result;
@@ -59,7 +64,6 @@ function defaultSolrParameters() {
     facet: true
   };
 }
-
 
 function reformatResponse(response) {
   var data = response.obj;
@@ -82,8 +86,13 @@ function reformatResponse(response) {
   fixed.metadata = {
     count: data.response.numFound,
     qtime: data.responseHeader.QTime,
-    url: response.url
+    url: response.url,
+    client: response.client
   };
+
+  if(response.headers) {
+    fixed.metadata.date = response.headers.date;
+  }
 
   if (data.facets) {
     fixed.tally = {};
@@ -136,8 +145,9 @@ function reformatFacet(facetData, numericIds, displayName) {
 function promise(query) {
   return grameneSwaggerClient
     .then(function (client) {
-      return makeCall(client, query)
+      return makeCall(client, query);
     })
+    .then(validate("SolrGeneResponse"))
     .then(reformatResponse)
 }
 
@@ -145,4 +155,4 @@ module.exports = {
   makeCall: makeCall,
   reformatResponse: reformatResponse,
   promise: promise
-}
+};

@@ -23,17 +23,17 @@ function setExpectedResultAndGetSearchPromise(searchMethod, fixtures, name) {
   // or to call the REAL LIVE REMOTE SERVER.
 
   if(!useLiveServer) {
-    spyOn(grameneSwaggerClient, 'then').andReturn(Q(_.cloneDeep(fixture.response)));
+    spyOn(grameneSwaggerClient, 'then').and.returnValue(Q(_.cloneDeep(fixture.response)));
   }
 
   promise = searchInterface[searchMethod](fixture.query);
 
   // decorate promise with parsed but unprocessed response.
-  promise.unprocessedResponse = fixture.response.obj
+  promise.unprocessedResponse = fixture.response.obj;
 
   return promise;
 }
 
 module.exports = function factory(searchMethod, fixtures) {
   return _.partial(setExpectedResultAndGetSearchPromise, searchMethod, fixtures);
-}
+};

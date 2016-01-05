@@ -5,7 +5,6 @@ var Q = require('q');
 
 var geneSearch = require('./geneSearch');
 var suggest = require('./suggest');
-//var genes = require('./genes');
 var mongo = require('./mongo');
 
 function testSearch(example) {
@@ -13,7 +12,14 @@ function testSearch(example) {
     .then(geneSearch.reformatResponse);
 }
 
-exports.genes = mongo.genes;
 exports.geneSearch = geneSearch.promise;
 exports.suggest = suggest.promise;
+
+exports.genes = mongo.genes;
+exports.genetrees = mongo.genetrees;
+exports.domains = mongo.domains;
+exports.pathways = mongo.pathways;
+exports.GO = mongo.GO;
+exports.PO = mongo.PO;
+
 exports._testSearch = testSearch;

@@ -5,39 +5,77 @@ var Q = require('q');
 
 var validate = require('./validate');
 var grameneSwaggerClient = require('./grameneSwaggerClient');
-var mongoCollections = require('gramene-mongodb-config');
 
-grameneSwaggerClient.then(function(client) {
-  console.log(client['Data access']);
-});
+// hard code these here so that we can guarantee module.export functions are
+// available immediately.
+var collections = {
+  genes: "MongoGenesResponse",
+  genetrees: "MongoGenetreesResponse",
+  maps: "MongoMapsResponse",
+  domains: "InterProResponse",
+  taxonomy: "TaxonomyResponse",
+  GO: "OntologyResponse",
+  PO: "OntologyResponse",
+  pathways: "ReactomeEntityResponse"
+};
 
-//_.forEach(['genetrees', ], function(name) {
-//  module.exports[name] = getFactory(coll.mongoCollection());
-//});
+module.exports = _.mapValues(collections, callPromiseFactory);
 
-// TODO Modify this implementation to support genetrees, etc.
+function callPromiseFactory(schemaName, methodName) {
+  function getCallFunction(gramene) {
+    return gramene['Data access'][methodName];
+  }
 
-function makeCall(gramene, query) {
-  var deferred = Q.defer();
-  var ids = getIdListString(query);
-  var params = {
-    idList: ids
+  function getSchemaName(gramene) {
+    var $ref = _.get(gramene, ['Data access', 'apis', methodName, 'type','schema', '$ref']);
+    if ($ref && $ref.indexOf('#/definitions/') == 0) {
+      return $ref.substring(14);
+    }
+  }
+
+  function checkSchemaAgainst(gramene) {
+    var scheamNameFromAPI = getSchemaName(gramene);
+    if(scheamNameFromAPI !== schemaName) {
+      throw new Error("Schema name mismatch. Expected " + schemaName + ", got " + scheamNameFromAPI);
+    }
+  }
+
+  function makeCall(gramene, query) {
+    var deferred, ids, params, apiMethodToInvoke;
+
+    checkSchemaAgainst(gramene);
+
+    deferred = Q.defer();
+    ids = getIdListString(query);
+    params = {
+      idList: ids
+    };
+    apiMethodToInvoke = getCallFunction(gramene);
+
+    apiMethodToInvoke(params, function addApiToResponseAndResolvePromise(res) {
+      res.client = gramene;
+      deferred.resolve(res);
+    });
+
+    return deferred.promise;
+  }
+
+  return function promise(queryString) {
+    return grameneSwaggerClient
+      .then(function makeCallFactory(client) {
+        return makeCall(client, queryString);
+      })
+      .then(validate(schemaName))
+      .then(reformatResponse);
   };
-
-  gramene['Data access'].genes(params, function(res) {
-    res.client = gramene;
-    deferred.resolve(res);
-  });
-
-  return deferred.promise;
 }
 
 function getIdListString(query) {
-  if(_.isString(query)) {
+  if (_.isString(query)) {
     return query;
   }
 
-  if(_.isArray(query)) {
+  if (_.isArray(query)) {
     return query.join(',');
   }
 
@@ -49,24 +87,8 @@ function reformatResponse(response) {
   return {
     metadata: {
       url: response.url,
-      count: response.obj.length
+      count: results.length
     },
-    docs: response.obj
-  }
+    docs: results
+  };
 }
-
-function promise(queryString) {
-  return grameneSwaggerClient
-    .then(function (client) {
-      return makeCall(client, queryString);
-    })
-    .then(validate("MongoGeneResponse"))
-    .then(reformatResponse);
-}
-
-
-module.exports = {
-  makeCall: makeCall,
-  reformatResponse: reformatResponse,
-  promise: promise
-};

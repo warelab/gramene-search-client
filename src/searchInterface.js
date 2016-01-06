@@ -12,6 +12,8 @@ function testSearch(example) {
     .then(geneSearch.reformatResponse);
 }
 
+exports.grameneClient = require('./grameneSwaggerClient');
+
 exports.geneSearch = geneSearch.promise;
 exports.suggest = suggest.promise;
 

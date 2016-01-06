@@ -11,7 +11,8 @@
       "cachedResultTypes": {}
     },
     "response": {
-      "obj": {
+      "validation": { "valid": true },
+      "obj":{
         "responseHeader": {
           "status": 0,
           "QTime": 0,
@@ -52,7 +53,8 @@
       "cachedResultTypes": {}
     },
     "response": {
-      "obj": {
+      "validation": { "valid": true },
+      "obj":{
         "responseHeader": {
           "status": 0,
           "QTime": 2,
@@ -181,7 +183,8 @@
       "cachedResultTypes": {}
     },
     "response": {
-      "obj": {
+      "validation": { "valid": true },
+      "obj":{
         "responseHeader": {
           "status": 0,
           "QTime": 97,

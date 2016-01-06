@@ -18,9 +18,7 @@ function swaggerResponseValidatorPromiseFactory(modelName) {
     if(client && client.validateModel) {
       validation = client.validateModel(modelName, data);
 
-      if (!validation.valid) {
-        console.warn(validation.GetFormattedErrors());
-      }
+      response.validation = validation;
     }
     else {
       //console.warn('Validation method `validateModel` not present on grameneSwaggerClient');

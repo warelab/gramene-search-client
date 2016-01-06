@@ -53,7 +53,8 @@ function reformatResponse(response) {
     metadata: {
       query: query,
       count: category.matches,
-      url: response.url
+      url: response.url,
+      validation: response.validation
     },
     categories: categories
   }

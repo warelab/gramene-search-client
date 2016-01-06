@@ -87,7 +87,8 @@ function reformatResponse(response) {
   return {
     metadata: {
       url: response.url,
-      count: results.length
+      count: results.length,
+      validation: response.validation
     },
     docs: results
   };

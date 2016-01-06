@@ -37,6 +37,7 @@ describe('geneData', function () {
 
   pit('should retreive a single document when provided a single ID', function() {
     return setExpectedResultAndGetSearchPromise('single').then(function(searchResult) {
+      expect(searchResult.metadata.validation.valid).toEqual(true);
       expect(searchResult.metadata.count).toEqual(1);
       expect(searchResult.metadata.url).toBeDefined();
       expect(searchResult.docs).toBeDefined();
@@ -47,6 +48,7 @@ describe('geneData', function () {
 
   pit('should retreive a single document when provided a single ID in an array', function() {
     return setExpectedResultAndGetSearchPromise('array1').then(function(searchResult) {
+      expect(searchResult.metadata.validation.valid).toEqual(true);
       expect(searchResult.metadata.count).toEqual(1);
       expect(searchResult.metadata.url).toBeDefined();
       expect(searchResult.docs).toBeDefined();
@@ -56,6 +58,7 @@ describe('geneData', function () {
 
   pit('should retreive a 2 documents when provided 2 ids', function() {
     return setExpectedResultAndGetSearchPromise('array2').then(function(searchResult) {
+      expect(searchResult.metadata.validation.valid).toEqual(true);
       expect(searchResult.metadata.count).toEqual(2);
       expect(searchResult.metadata.url).toBeDefined();
       expect(searchResult.docs).toBeDefined();

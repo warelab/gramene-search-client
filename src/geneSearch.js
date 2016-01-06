@@ -87,7 +87,8 @@ function reformatResponse(response) {
     count: data.response.numFound,
     qtime: data.responseHeader.QTime,
     url: response.url,
-    client: response.client
+    client: response.client,
+    validation: response.validation
   };
 
   if(response.headers) {

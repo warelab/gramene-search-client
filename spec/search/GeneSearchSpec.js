@@ -18,6 +18,7 @@ describe('geneSearch', function () {
     expect(searchResult).toBeDefined();
     expect(searchResult.metadata).toBeDefined();
     expect(searchResult.metadata.count).toEqual(expectedResult.response.numFound);
+    expect(searchResult.metadata.validation.valid).toEqual(true);
   }
 
   pit('should process facet correctly', function () {
@@ -56,11 +57,6 @@ describe('geneSearch', function () {
       checkResultCounts(searchResult, searchPromise.unprocessedResponse);
 
       expect(searchResult.list.length).toEqual(5);
-
-      _.forEach(searchResult.list, function (doc, idx) {
-        var expectedDoc = searchPromise.unprocessedResponse.response.docs[idx];
-        expect(doc.id).toEqual(expectedDoc.id);
-      })
     });
   });
 

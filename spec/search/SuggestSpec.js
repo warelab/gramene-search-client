@@ -31,7 +31,8 @@ describe('suggest', function () {
   function checkResultCount(searchResult, expectedResult) {
     expect(searchResult).toBeDefined();
     expect(searchResult.metadata).toBeDefined();
-    expect(searchResult.metadata.count).toEqual(expectedResult.grouped.category.matches);
+    expect(searchResult.metadata.count).toBeGreaterThan(expectedResult.grouped.category.matches - 1);
+    expect(searchResult.metadata.validation.valid).toEqual(true);
   }
 
   pit('the simple case', function () {
@@ -63,12 +64,10 @@ describe('suggest', function () {
 
     return searchPromise.then(function (searchResult) {
       checkResultCount(searchResult, searchPromise.unprocessedResponse);
-
-      expect(searchResult.metadata.count).toEqual(176982);
       expect(searchResult.metadata.query).toEqual(term);
 
       expect(searchResult.categories).toBeDefined();
-      expect(searchResult.categories.length).toEqual(9);
+      expect(searchResult.categories.length).toBeGreaterThan(8);
 
       var topCat = searchResult.categories[0];
       expect(topCat.label).toEqual('Gene');

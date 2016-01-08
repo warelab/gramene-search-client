@@ -1,6 +1,6 @@
 {
   "name": "gramene-search-client",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "dependencies": {
     "lodash": {
       "version": "3.10.1",

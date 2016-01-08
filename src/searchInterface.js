@@ -13,6 +13,7 @@ function testSearch(example) {
 }
 
 exports.grameneClient = require('./grameneSwaggerClient');
+exports.validate = require('./validate');
 
 exports.geneSearch = geneSearch.promise;
 exports.suggest = suggest.promise;

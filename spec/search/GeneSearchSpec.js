@@ -1,4 +1,3 @@
-var Q = require('q');
 var resultFixtures = require('../support/searchResult48');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
@@ -60,10 +59,15 @@ describe('geneSearch', function () {
     });
   });
 
-  it('should allow test searches to be performed', function () {
-    return searchInterface._testSearch('binned').then(function (data) {
+  pit('should allow test searches to be performed', function () {
+    return searchInterface._testSearch('rows10').then(function (data) {
       expect(data).toBeDefined();
     })
+  });
+
+  it('should give descriptive error if invalid test results are requested from a testSearch', function () {
+    function shouldThrow() { searchInterface._testSearch('rows100') }
+    expect(shouldThrow).toThrow();
   });
 
 });

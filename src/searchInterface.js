@@ -8,7 +8,12 @@ var suggest = require('./suggest');
 var mongo = require('./mongo');
 
 function testSearch(example) {
-  return Q(_.cloneDeep(require('../spec/support/searchResult48')[example]))
+  var tests = require('../spec/support/searchResult48');
+  var testResults = _.get(tests, [example, 'response']);
+  if(!testResults) {
+    throw new Error("testSearch should be one of " + _.keys(tests).join(', '));
+  }
+  return Q(_.cloneDeep(testResults))
     .then(geneSearch.reformatResponse);
 }
 

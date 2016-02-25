@@ -10,7 +10,7 @@ require('jasmine-expect');
 
 var setExpectedResultAndGetSearchPromise = require('../support/testSwaggerClientPromiseFactory')('genetrees', geneFixtures);
 
-describe('genetreeData', function () {
+describe('geneData', function () {
   var searchInterface = require('../../src/searchInterface');
   var grameneSwaggerClient = require('../../src/grameneSwaggerClient');
 

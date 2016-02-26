@@ -6,6 +6,19 @@
   "scripts": {
     "test": "node node_modules/jasmine/bin/jasmine.js"
   },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ]
+        }
+      ]
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git@github:warelab/gramene-search-client.git"

@@ -1,7 +1,7 @@
 'use strict';
 
 var queryString = require('query-string');
-const HARDCODED_SERVER = "http://data.gramene.org/swagger";
+var HARDCODED_SERVER = "http://data.gramene.org/swagger";
 
 function determineServerUrl(){
   var server;

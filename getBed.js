@@ -1,4 +1,4 @@
-#!/usr/env node
+#!/usr/bin/env node
 var argv = require('minimist')(process.argv.slice(2));
 
 var url = argv.swagger || 'http://data.gramene.org/v50/swagger';
@@ -43,6 +43,7 @@ else if (argv.taxon_id) {
     client['Data access'].genes(
       {
         wt: 'bed',
+        rows: -1,
         bedFeature: feature,
         bedCombiner: combiner,
         taxon_id: argv.taxon_id,

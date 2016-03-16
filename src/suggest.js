@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var Q = require('q');
 
 var grameneSwaggerClient = require('./grameneSwaggerClient');
 var validate = require('./validate');

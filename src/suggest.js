@@ -7,15 +7,12 @@ var grameneSwaggerClient = require('./grameneSwaggerClient');
 var validate = require('./validate');
 
 function makeCall(gramene, queryString) {
-  var deferred = Q.defer();
   var params = {q: queryString ? queryString + '*' : '*'};
 
-  gramene['Search'].suggestions(params, function(res) {
+  return gramene['Search'].suggestions(params).then(function(res) {
     res.client = gramene;
-    deferred.resolve(res);
+    return res;
   });
-
-  return deferred.promise;
 }
 
 function reformatResponse(response) {

@@ -7,14 +7,12 @@ var grameneSwaggerClient = require('./grameneSwaggerClient');
 var validate = require('./validate');
 
 function makeCall(gramene, query) {
-  var deferred = Q.defer();
   var params = getSolrParameters(query);
   params.collection = 'genes';
-  gramene['Search'].genes(params, function(res) {
+  return gramene['Search'].genes(params).then(function(res) {
     res.client = gramene;
-    deferred.resolve(res);
+    return res;
   });
-  return deferred.promise;
 }
 
 function getSolrParameters(query) {

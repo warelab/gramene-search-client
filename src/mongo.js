@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var Q = require('q');
 
 var validate = require('./validate');
 var grameneSwaggerClient = require('./grameneSwaggerClient');
@@ -41,23 +40,20 @@ function callPromiseFactory(schemaName, methodName) {
   }
 
   function makeCall(gramene, query) {
-    var deferred, ids, params, apiMethodToInvoke;
+    var ids, params, apiMethodToInvoke;
 
     checkSchemaAgainst(gramene);
 
-    deferred = Q.defer();
     ids = getIdListString(query);
     params = {
       idList: ids
     };
     apiMethodToInvoke = getCallFunction(gramene);
 
-    apiMethodToInvoke(params, function addApiToResponseAndResolvePromise(res) {
+    return apiMethodToInvoke(params).then(function addApiToResponseAndResolvePromise(res) {
       res.client = gramene;
-      deferred.resolve(res);
+      return res;
     });
-
-    return deferred.promise;
   }
 
   return function promise(queryString) {

@@ -1,6 +1,6 @@
 {
   "name": "gramene-search-client",
-  "version": "2.6.3",
+  "version": "3.0.0",
   "description": "Javascript client for searching Gramene's API",
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,8 @@
   },
   "dependencies": {
     "lodash": "^3.6.0",
-    "q": "^1.2.0",
     "query-string": "^3.0.0",
-    "swagger-client": "^2.1.6",
+    "swagger-client": "^2.1.13",
     "swagger-model-validator": "^2.0.3"
   },
   "author": "mycrobe",

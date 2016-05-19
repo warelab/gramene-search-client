@@ -20,7 +20,7 @@ function makeCall(gramene, queryString, taxa) {
 
 function reformatResponseTaxa(taxa) {
   return function reformatResponse(response) {
-    var query, taxa, category, categories;
+    var query, category, categories;
     query = _.get(response, 'obj.responseHeader.params.q');
 
     // remove the trailing '*'

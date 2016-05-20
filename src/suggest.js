@@ -16,9 +16,9 @@ function makeCall(gramene, queryString, taxa) {
     + ' synonym:' + queryString + '^2'
     + ' text:' + queryString + '*^1'
   }
-  if ( !! taxa) {
-    params.fq = 'taxon_id:(' + Object.keys(taxa).join(' ') + ')';
-  }
+  // if ( ! _.isEmpty(taxa)) {
+  //   params.fq = 'taxon_id:(' + Object.keys(taxa).join(' ') + ')';
+  // }
   return gramene['Search'].suggestions(params).then(function(res) {
     res.client = gramene;
     return res;
@@ -48,7 +48,7 @@ function reformatResponseTaxa(queryString, taxa) {
           return;
         }
 
-        if (taxa) {
+        if (!_.isEmpty(taxa)) {
           doclist.docs.forEach(function(doc) {
             doc.num_genes = 0;
             for(var i=0;i<doc.taxon_id.length;i++) {

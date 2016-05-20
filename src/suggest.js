@@ -7,8 +7,15 @@ var validate = require('./validate');
 
 function makeCall(gramene, queryString, taxa) {
   var params = {
-    q: queryString ? queryString + '*' : '*'
+    q: '*'
   };
+  if (queryString) {
+    params.q = '{!boost b=relevance}'
+    + 'name:' + queryString + '^3'
+    + ' id:' + queryString + '^5'
+    + ' synonym:' + queryString + '^2'
+    + ' text:' + queryString + '*^1'
+  }
   if ( !! taxa) {
     params.fq = 'taxon_id:(' + Object.keys(taxa).join(' ') + ')';
   }
@@ -18,7 +25,7 @@ function makeCall(gramene, queryString, taxa) {
   });
 }
 
-function reformatResponseTaxa(taxa) {
+function reformatResponseTaxa(queryString, taxa) {
   return function reformatResponse(response) {
     var query, category, categories;
     query = _.get(response, 'obj.responseHeader.params.q');
@@ -63,7 +70,7 @@ function reformatResponseTaxa(taxa) {
 
     return {
       metadata: {
-        query: query,
+        query: queryString,
         count: category.matches,
         url: response.url,
         validation: response.validation
@@ -79,7 +86,7 @@ function promise(queryString, taxa) {
       return makeCall(client, queryString, taxa);
     })
     .then(validate("SolrSuggestResponse"))
-    .then(reformatResponseTaxa(taxa));
+    .then(reformatResponseTaxa(queryString, taxa));
 }
 
 

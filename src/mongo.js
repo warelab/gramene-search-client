@@ -39,7 +39,7 @@ function callPromiseFactory(schemaName, methodName) {
     }
   }
 
-  function makeCall(gramene, query) {
+  function makeCall(gramene, query, extraParams) {
     var ids, params, apiMethodToInvoke;
 
     checkSchemaAgainst(gramene);
@@ -48,6 +48,8 @@ function callPromiseFactory(schemaName, methodName) {
     params = {
       idList: ids
     };
+    _.assign(params, extraParams);
+
     apiMethodToInvoke = getCallFunction(gramene);
 
     return apiMethodToInvoke(params).then(function addApiToResponseAndResolvePromise(res) {
@@ -56,10 +58,10 @@ function callPromiseFactory(schemaName, methodName) {
     });
   }
 
-  return function promise(queryString) {
+  return function promise(queryString, extraParams) {
     return grameneSwaggerClient
       .then(function makeCallFactory(client) {
-        return makeCall(client, queryString);
+        return makeCall(client, queryString, extraParams);
       })
       .then(validate(schemaName))
       .then(reformatResponse);

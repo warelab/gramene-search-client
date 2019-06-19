@@ -18,6 +18,8 @@ var collections = {
   pathways: "ReactomeEntityResponse"
 };
 
+var batchSize=100;
+
 module.exports = _.mapValues(collections, callPromiseFactory);
 
 function callPromiseFactory(schemaName, methodName) {
@@ -40,20 +42,28 @@ function callPromiseFactory(schemaName, methodName) {
   }
 
   function makeCall(gramene, query, extraParams) {
-    var ids, params, apiMethodToInvoke;
 
     checkSchemaAgainst(gramene);
 
-    ids = getIdListString(query);
-    params = {
-      idList: ids
-    };
-    _.assign(params, extraParams);
+    var batches = getIdListString(query);
+    var promises = batches.map(function(ids) {
+      var params = {
+        idList: ids
+      };
+      _.assign(params, extraParams);
 
-    apiMethodToInvoke = getCallFunction(gramene);
+      var apiMethodToInvoke = getCallFunction(gramene);
+      return apiMethodToInvoke(params);
+    });
 
-    return apiMethodToInvoke(params).then(function addApiToResponseAndResolvePromise(res) {
+    return Promise.all(promises).then(function concatenateBatchesAddApiToResponseAndResolvePromises(resList) {
+      var docs = [];
+      resList.forEach(function(response) {
+        docs = docs.concat(response.obj)
+      });
+      var res = resList[0];
       res.client = gramene;
+      res.obj = docs;
       return res;
     });
   }
@@ -70,11 +80,15 @@ function callPromiseFactory(schemaName, methodName) {
 
 function getIdListString(query) {
   if (_.isString(query)) {
-    return query;
+    return [query];
   }
 
   if (_.isArray(query)) {
-    return query.join(',');
+    var batches = [];
+    for(var i=0;i<query.length;i+=batchSize) {
+      batches.push(query.slice(i,i+batchSize).join(','));
+    }
+    return batches;
   }
 
   throw new Error('Query should be a string or an array. We were provided ' + typeof query);

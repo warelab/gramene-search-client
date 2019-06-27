@@ -1,6 +1,6 @@
 {
   "name": "gramene-search-client",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "dependencies": {
     "argparse": {
       "version": "1.0.6",

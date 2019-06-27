@@ -47,6 +47,9 @@ function callPromiseFactory(schemaName, methodName) {
 
     var batches = getIdListString(query);
     var promises = batches.map(function(ids) {
+      if (ids.length === 1) {
+        ids.push(0);
+      }
       var params = {
         idList: ids
       };

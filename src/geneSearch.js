@@ -14,11 +14,15 @@ function makeCall(gramene, query) {
   });
 }
 
+var queryRegex = RegExp('^{!');
 function getSolrParameters(query) {
   var result = defaultSolrParameters();
   if (!query) return result;
 
-  result.q = (query.q || '') + '*';
+  result.q = query.q || '';
+  if (!queryRegex.test(query.q)) {
+    result.q += '*';
+  }
 
   for (var rtName in query.resultTypes) {
     _.assign(result, query.resultTypes[rtName], function (existing, another) {

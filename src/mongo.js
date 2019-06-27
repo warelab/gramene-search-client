@@ -47,9 +47,6 @@ function callPromiseFactory(schemaName, methodName) {
 
     var batches = getIdListString(query);
     var promises = batches.map(function(ids) {
-      if (ids.length === 1) {
-        ids.push(0);
-      }
       var params = {
         idList: ids
       };
@@ -89,7 +86,11 @@ function getIdListString(query) {
   if (_.isArray(query)) {
     var batches = [];
     for(var i=0;i<query.length;i+=batchSize) {
-      batches.push(query.slice(i,i+batchSize).join(','));
+      var batch = query.slice(i,i+batchSize);
+      if (batch.length === 1) {
+        batch.push(0);
+      }
+      batches.push(batch.join(','));
     }
     return batches;
   }

@@ -54,6 +54,10 @@ function getSolrParameters(query) {
     result.fq = Object.keys(query.filters);
     result.facet = true;
   }
+  else if (query.fq) {
+    result.fq = query.fq;
+    result.facet = true;
+  }
 
   return result;
 }

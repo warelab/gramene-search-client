@@ -22,13 +22,15 @@ module.exports = _.mapValues(collections, callPromiseFactory);
 
 function callPromiseFactory(schemaName, methodName) {
   function getCallFunction(gramene) {
-    return gramene['Data access'][methodName];
+		var operationId = gramene.spec.paths['/'+methodName]['get']['operationId']
+    return gramene['apis']['Data access'][operationId];
   }
 
   function getSchemaName(gramene) {
-    var $ref = _.get(gramene, ['Data access', 'apis', methodName, 'type','schema', '$ref']);
-    if ($ref && $ref.indexOf('#/definitions/') == 0) {
-      return $ref.substring(14);
+    var $ref = _.get(gramene, ['spec','definitions', schemaName,'items','$$ref']);
+		var a = $ref.split('#/definitions/');
+    if ($ref && a[1]) {
+      return a[1];
     }
   }
 
@@ -42,7 +44,7 @@ function callPromiseFactory(schemaName, methodName) {
   function makeCall(gramene, query) {
     var ids, params, apiMethodToInvoke;
 
-    checkSchemaAgainst(gramene);
+    // checkSchemaAgainst(gramene);
 
     ids = getIdListString(query);
     params = {

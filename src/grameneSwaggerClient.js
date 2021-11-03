@@ -5,9 +5,9 @@ var Validator = require('swagger-model-validator');
 var serverUrl = require('./serverUrl');
 
 var grameneSwaggerClient = (function() {
-  var Client = require('swagger-client');
+  var SwaggerClient = require('swagger-client');
 
-  return new Client({url: serverUrl(), usePromise: true})
+  return new SwaggerClient(serverUrl())
     .then(function addValidator(client) {
     new Validator(client);
     return client;

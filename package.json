@@ -19,7 +19,7 @@
     "lodash": "^4.17.21",
     "q": "^1.5.1",
     "query-string": "^3.0.0",
-    "swagger-client": "^3.16.1",
+    "swagger-client": "2.2.21",
     "swagger-model-validator": "^2.0.3"
   },
   "author": "mycrobe",

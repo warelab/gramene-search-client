@@ -1,6 +1,6 @@
 {
   "name": "gramene-search-client",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Javascript client for searching Gramene's API",
   "main": "index.js",
   "scripts": {
